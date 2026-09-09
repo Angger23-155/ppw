@@ -1,0 +1,24 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+- file: tugas1
+# - file: dataUnderstanding
+#   sections:
+#     - file: explorasiData
+# - file: dataPreprocessing
+#   sections:
+#     - file: outlierDetection
+#     - file: overSampling
+#     - file: naiveBayes
+#     - file: baggingClassifier
+# - file: forecasting
+#   sections:
+#     - file: crawl
+#     - file: preProcessing
+#     - file: knnRegression
+#     - file: knnRegressionPart2
+# - file: voiceDetection
+# - file: fishClassification
