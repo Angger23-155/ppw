@@ -5,7 +5,7 @@ format: jb-book
 root: intro
 chapters:
 - file: pengantarwebmining
-# - file: dataUnderstanding
+- file: crawlingdata
 #   sections:
 #     - file: explorasiData
 # - file: dataPreprocessing
