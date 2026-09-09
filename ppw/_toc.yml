@@ -4,7 +4,7 @@
 format: jb-book
 root: intro
 chapters:
-- file: tugas1
+- file: pengantarwebmining
 # - file: dataUnderstanding
 #   sections:
 #     - file: explorasiData
