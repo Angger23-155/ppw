@@ -6,9 +6,7 @@ root: intro
 chapters:
 - file: pengantarwebmining
 - file: crawlingdata
-#   sections:
-#     - file: explorasiData
-# - file: dataPreprocessing
+- file: preprocessing
 #   sections:
 #     - file: outlierDetection
 #     - file: overSampling
