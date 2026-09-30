@@ -7,12 +7,9 @@ chapters:
 - file: pengantarwebmining
 - file: crawlingdata
 - file: preprocessing
-#   sections:
-#     - file: outlierDetection
-#     - file: overSampling
-#     - file: naiveBayes
-#     - file: baggingClassifier
-# - file: forecasting
+  sections:
+    - file: Skipgram
+- file: klasifikasi
 #   sections:
 #     - file: crawl
 #     - file: preProcessing
