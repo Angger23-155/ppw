@@ -1,0 +1,1255 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>PREPROCESSING &#8212; Pencarian dan Penambangan Web</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'preprocessing';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contoh latihan SKIP-GRAM" href="Skipgram.html" />
+    <link rel="prev" title="CRAWLING DATA" href="crawlingdata.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/profil.jpg" class="logo__image only-light" alt="Pencarian dan Penambangan Web - Home"/>
+    <img src="_static/profil.jpg" class="logo__image only-dark pst-js-only" alt="Pencarian dan Penambangan Web - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pengantarwebmining.html"><strong>PENGANTAR WEB MINING</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="crawlingdata.html"><strong>CRAWLING DATA</strong></a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>PREPROCESSING</strong></a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="klasifikasi.html"><strong>KLASIFIKASI</strong></a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fpreprocessing.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/preprocessing.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>PREPROCESSING</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>PREPROCESSING</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#prapemrosesan-data-teks-dan-ekstraksi-tf-idf">Prapemrosesan Data Teks dan Ekstraksi TF-IDF</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-fitur-tf-idf-term-frequency-inverse-document-frequency">Ekstraksi Fitur: TF-IDF (Term Frequency - Inverse Document Frequency)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-tf-idf-kata-unik-per-kelas">Visualisasi TF-IDF: Kata Unik per Kelas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduksi-dimensi-principal-component-analysis-pca">Reduksi Dimensi: Principal Component Analysis (PCA)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-pca-persebaran-data-berita">Visualisasi PCA: Persebaran Data Berita</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="preprocessing">
+<h1><strong>PREPROCESSING</strong><a class="headerlink" href="#preprocessing" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="prapemrosesan-data-teks-dan-ekstraksi-tf-idf">
+<h1>Prapemrosesan Data Teks dan Ekstraksi TF-IDF<a class="headerlink" href="#prapemrosesan-data-teks-dan-ekstraksi-tf-idf" title="Link to this heading">#</a></h1>
+<p>Model algoritma tidak dapat memproses teks mentah secara langsung, sehingga teks harus dikonversi menjadi representasi angka[cite: 1]. Sebelum diekstrak, data teks harus dibersihkan dari derau (<em>noise</em>).</p>
+<p>Langkah prapemrosesan meliputi:</p>
+<ul class="simple">
+<li><p><strong>Cleansing &amp; Case Folding:</strong> Menghapus simbol/angka dan mengubah teks menjadi huruf kecil.</p></li>
+<li><p><strong>Stopword Removal &amp; Stemming:</strong> Membuang kata hubung umum yang tidak informatif dan mengembalikan kata ke bentuk dasarnya.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nltk</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nltk.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Sastrawi.Stemmer.StemmerFactory</span><span class="w"> </span><span class="kn">import</span> <span class="n">StemmerFactory</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">)</span>
+
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">'stopwords'</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">'punkt'</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># 1. Memuat Dataset</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'data_berita_sport_finance.csv'</span><span class="p">)</span>
+<span class="c1"># Menggabungkan fitur judul dan isi untuk konteks yang lebih kaya</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">'Teks Mentah'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Judul Berita'</span><span class="p">]</span> <span class="o">+</span> <span class="s2">" "</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Isi Berita'</span><span class="p">]</span>
+
+<span class="c1"># 2. Inisialisasi NLP Tools</span>
+<span class="n">stop_words_id</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">'indonesian'</span><span class="p">))</span>
+<span class="n">stop_words_en</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">'english'</span><span class="p">))</span>
+<span class="n">stop_words_final</span> <span class="o">=</span> <span class="n">stop_words_id</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">stop_words_en</span><span class="p">)</span>
+<span class="c1"># Tambahan daftar kata penghubung dan singkatan yang sering muncul di berita</span>
+<span class="n">custom_stopwords</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'dan'</span><span class="p">,</span><span class="s1">'atau'</span><span class="p">,</span><span class="s1">'yang'</span><span class="p">,</span><span class="s1">'dengan'</span><span class="p">,</span><span class="s1">'juga'</span><span class="p">,</span><span class="s1">'karena'</span><span class="p">,</span><span class="s1">'namun'</span><span class="p">,</span><span class="s1">'sehingga'</span><span class="p">,</span><span class="s1">'adalah'</span><span class="p">,</span><span class="s1">'akan'</span><span class="p">,</span>
+    <span class="s1">'saat'</span><span class="p">,</span><span class="s1">'pada'</span><span class="p">,</span><span class="s1">'untuk'</span><span class="p">,</span><span class="s1">'dari'</span><span class="p">,</span><span class="s1">'oleh'</span><span class="p">,</span><span class="s1">'dalam'</span><span class="p">,</span><span class="s1">'dapat'</span><span class="p">,</span><span class="s1">'kami'</span><span class="p">,</span><span class="s1">'mereka'</span><span class="p">,</span><span class="s1">'kita'</span><span class="p">,</span><span class="s1">'saya'</span><span class="p">,</span>
+    <span class="s1">'ini'</span><span class="p">,</span><span class="s1">'itu'</span><span class="p">,</span><span class="s1">'tersebut'</span><span class="p">,</span><span class="s1">'tsb'</span><span class="p">,</span><span class="s1">'dll'</span><span class="p">,</span><span class="s1">'dkk'</span><span class="p">,</span><span class="s1">'spt'</span><span class="p">,</span><span class="s1">'yg'</span><span class="p">,</span><span class="s1">'dgn'</span><span class="p">,</span><span class="s1">'dr'</span><span class="p">,</span><span class="s1">'jr'</span><span class="p">,</span><span class="s1">'sr'</span><span class="p">,</span><span class="s1">'thn'</span><span class="p">,</span>
+    <span class="s1">'tdk'</span><span class="p">,</span><span class="s1">'gak'</span><span class="p">,</span><span class="s1">'nggak'</span><span class="p">,</span><span class="s1">'ya'</span><span class="p">,</span><span class="s1">'ia'</span><span class="p">,</span><span class="s1">'mereka'</span><span class="p">,</span><span class="s1">'terkait'</span><span class="p">,</span><span class="s1">'berdasarkan'</span><span class="p">,</span><span class="s1">'setelah'</span><span class="p">,</span><span class="s1">'sebelum'</span><span class="p">,</span>
+    <span class="s1">'sambil'</span><span class="p">,</span><span class="s1">'selain'</span><span class="p">,</span><span class="s1">'sekitar'</span><span class="p">,</span><span class="s1">'hingga'</span><span class="p">,</span><span class="s1">'maupun'</span><span class="p">,</span><span class="s1">'bisa'</span><span class="p">,</span><span class="s1">'per'</span><span class="p">,</span><span class="s1">'waktu'</span><span class="p">,</span><span class="s1">'apakah'</span><span class="p">,</span><span class="s1">'adanya'</span>
+<span class="p">}</span>
+<span class="n">stop_words_final</span> <span class="o">=</span> <span class="n">stop_words_final</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">custom_stopwords</span><span class="p">)</span>
+<span class="n">stemmer</span> <span class="o">=</span> <span class="n">StemmerFactory</span><span class="p">()</span><span class="o">.</span><span class="n">create_stemmer</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">bersihkan_teks</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">""</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'[^a-zA-Z\s]'</span><span class="p">,</span> <span class="s1">' '</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'\s+'</span><span class="p">,</span> <span class="s1">' '</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="n">words</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">w</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stop_words_final</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># Menerapkan stemming dan menghapus stopword</span>
+    <span class="n">processed_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span><span class="p">]</span>
+    <span class="k">return</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">processed_words</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Memproses pembersihan teks (estimasi waktu: 2-4 menit)..."</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">'Teks Bersih'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Teks Mentah'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">bersihkan_teks</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">'Label Kategori'</span><span class="p">,</span> <span class="s1">'Teks Bersih'</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Memproses pembersihan teks (estimasi waktu: 2-4 menit)...
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Label Kategori</th>
+      <th>Teks Bersih</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SPORT</td>
+      <td>banjir asi games jepang aman kota nagoya jepan...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>SPORT</td>
+      <td>debut asi games ubed sabar rebut emas regu put...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SPORT</td>
+      <td>men world tennis championship rifqi rafalentin...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>SPORT</td>
+      <td>kevin sanjaya antusias lihat semangat talenta ...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>SPORT</td>
+      <td>atlet muda modern pentathlon sempat karier mil...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="ekstraksi-fitur-tf-idf-term-frequency-inverse-document-frequency">
+<h2>Ekstraksi Fitur: TF-IDF (Term Frequency - Inverse Document Frequency)<a class="headerlink" href="#ekstraksi-fitur-tf-idf-term-frequency-inverse-document-frequency" title="Link to this heading">#</a></h2>
+<p>Metode representasi <em>Bag-of-Words</em> (BOW) memiliki kelemahan karena didominasi oleh kata-kata umum dan sering memicu <em>sparsity</em> (matriks jarang berisikan banyak nilai nol)[cite: 1].</p>
+<p>TF-IDF mengatasi hal ini menggunakan formula <span class="math notranslate nohighlight">\(tf(t, d) \times idf(t, D)\)</span>, di mana <span class="math notranslate nohighlight">\(idf(t) = log(N / df(t))\)</span>[cite: 1]. Mekanisme ini secara otomatis memberikan penalti (skor rendah) pada kata umum yang muncul di seluruh dokumen, dan menyoroti kata kunci unik yang mencirikan dokumen tertentu[cite: 1].</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Mengekstrak fitur TF-IDF..."</span><span class="p">)</span>
+<span class="c1"># Membangun Document-Term Matrix (DTM)</span>
+<span class="n">vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="n">tfidf_matrix</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'Teks Bersih'</span><span class="p">])</span>
+
+<span class="c1"># Konversi ke DataFrame</span>
+<span class="n">fitur_kata</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+<span class="n">df_tfidf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">tfidf_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="n">fitur_kata</span><span class="p">)</span>
+<span class="n">df_tfidf</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">'Label Kategori'</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Label Kategori'</span><span class="p">])</span>
+
+<span class="c1"># Ekspor ke folder kerja aktif agar file selalu muncul di lokasi project</span>
+<span class="n">output_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s1">'tfidf_berita.csv'</span><span class="p">)</span>
+<span class="n">df_tfidf</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Bentuk Matriks TF-IDF: </span><span class="si">{</span><span class="n">df_tfidf</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> baris x </span><span class="si">{</span><span class="n">df_tfidf</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> kolom kata unik."</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_tfidf</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mengekstrak fitur TF-IDF...
+Bentuk Matriks TF-IDF: 200 baris x 4884 kolom kata unik.
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Label Kategori</th>
+      <th>aadi</th>
+      <th>aam</th>
+      <th>aan</th>
+      <th>aau</th>
+      <th>abadi</th>
+      <th>abai</th>
+      <th>abdi</th>
+      <th>abdul</th>
+      <th>abdullah</th>
+      <th>...</th>
+      <th>zapp</th>
+      <th>zein</th>
+      <th>zeinatma</th>
+      <th>zenix</th>
+      <th>zhang</th>
+      <th>zigmars</th>
+      <th>zona</th>
+      <th>zulfikar</th>
+      <th>zulfikri</th>
+      <th>zulhas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SPORT</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>SPORT</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SPORT</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>SPORT</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>SPORT</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.038753</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 4884 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="visualisasi-tf-idf-kata-unik-per-kelas">
+<h2>Visualisasi TF-IDF: Kata Unik per Kelas<a class="headerlink" href="#visualisasi-tf-idf-kata-unik-per-kelas" title="Link to this heading">#</a></h2>
+<p>Setelah matriks TF-IDF terbentuk, kita menghitung total bobot setiap kata dalam tiap kelas berita. Langkah ini membantu melihat kata-kata yang paling dominan dan paling khas untuk klasifikasi:</p>
+<ul class="simple">
+<li><p><strong>SPORT</strong> biasanya akan menonjol pada istilah cabang olahraga, atlet, turnamen, dan momentum pertandingan.</p></li>
+<li><p><strong>FINANCE</strong> biasanya akan menonjol pada istilah pasar, saham, ekonomi, investasi, dan kebijakan keuangan.</p></li>
+<li><p>Grafik batang dan word cloud ini memudahkan kita membandingkan kata kunci yang paling relevan di masing-masing kategori.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">'ignore'</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">ResourceWarning</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">'ignore'</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s1">'.*unclosed file.*wordcloud.*stopwords.*'</span><span class="p">)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">wordcloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">WordCloud</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+
+<span class="c1"># Siapkan data setiap kelas secara terpisah</span>
+<span class="n">sport_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">'Label Kategori'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'SPORT'</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">finance_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">'Label Kategori'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'FINANCE'</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># 1. Inisialisasi dan Transformasi TF-IDF untuk masing-masing kelas</span>
+<span class="n">vectorizer_sport</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="n">vectorizer_finance</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+
+<span class="n">sport_matrix</span> <span class="o">=</span> <span class="n">vectorizer_sport</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">sport_df</span><span class="p">[</span><span class="s1">'Teks Bersih'</span><span class="p">])</span>
+<span class="n">finance_matrix</span> <span class="o">=</span> <span class="n">vectorizer_finance</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">finance_df</span><span class="p">[</span><span class="s1">'Teks Bersih'</span><span class="p">])</span>
+
+<span class="n">sport_fitur</span> <span class="o">=</span> <span class="n">vectorizer_sport</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+<span class="n">finance_fitur</span> <span class="o">=</span> <span class="n">vectorizer_finance</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+
+<span class="n">sport_df_tfidf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">sport_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="n">sport_fitur</span><span class="p">)</span>
+<span class="n">finance_df_tfidf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">finance_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="n">finance_fitur</span><span class="p">)</span>
+
+<span class="c1"># Hitung total bobot TF-IDF per kata untuk tiap kelas</span>
+<span class="n">sport_skor</span> <span class="o">=</span> <span class="n">sport_df_tfidf</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">finance_skor</span> <span class="o">=</span> <span class="n">finance_df_tfidf</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># VISUALISASI 1: Bar Chart (Top 10 Kata per Kelas)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="n">sport_skor</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">sport_skor</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">'viridis'</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'Top 10 Kata Unik SPORT'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Total Skor TF-IDF'</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Kata Unik'</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="n">finance_skor</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">finance_skor</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">'plasma'</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'Top 10 Kata Unik FINANCE'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Total Skor TF-IDF'</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Kata Unik'</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># VISUALISASI 2: Word Cloud per Kelas</span>
+<span class="n">wordcloud_sport</span> <span class="o">=</span> <span class="n">WordCloud</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">background_color</span><span class="o">=</span><span class="s1">'white'</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="s1">'viridis'</span><span class="p">)</span><span class="o">.</span><span class="n">generate_from_frequencies</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">sport_skor</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">sport_skor</span><span class="o">.</span><span class="n">values</span><span class="p">)))</span>
+<span class="n">wordcloud_finance</span> <span class="o">=</span> <span class="n">WordCloud</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">background_color</span><span class="o">=</span><span class="s1">'white'</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="s1">'plasma'</span><span class="p">)</span><span class="o">.</span><span class="n">generate_from_frequencies</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">finance_skor</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">finance_skor</span><span class="o">.</span><span class="n">values</span><span class="p">)))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">wordcloud_sport</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">'bilinear'</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'Word Cloud SPORT'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">wordcloud_finance</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">'bilinear'</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'Word Cloud FINANCE'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Top 10 SPORT:'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sport_skor</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">Top 10 FINANCE:'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">finance_skor</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a3226304a57997792b4a79cc147f29df81b02942bb48d1e88c4973b1595699c0.png" src="_images/a3226304a57997792b4a79cc147f29df81b02942bb48d1e88c4973b1595699c0.png" />
+<img alt="_images/fd078a8b960b553dfc75b942a4bf7748bbe82ebe379f2086e2b929d3dd5b2eeb.png" src="_images/fd078a8b960b553dfc75b942a4bf7748bbe82ebe379f2086e2b929d3dd5b2eeb.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Top 10 SPORT:
+games        4.675968
+balap        4.665471
+indonesia    4.634424
+asi          4.383941
+motogp       3.733424
+olahraga     3.462562
+atlet        3.019805
+tim          2.981683
+marc         2.974593
+menang       2.942188
+dtype: float64
+
+Top 10 FINANCE:
+rekening      3.851239
+rp            3.740563
+purbaya       3.548182
+perintah      3.285501
+harga         3.237315
+indonesia     2.788878
+menteri       2.588415
+usaha         2.562751
+masyarakat    2.560089
+saham         2.456732
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="reduksi-dimensi-principal-component-analysis-pca">
+<h2>Reduksi Dimensi: Principal Component Analysis (PCA)<a class="headerlink" href="#reduksi-dimensi-principal-component-analysis-pca" title="Link to this heading">#</a></h2>
+<p>Ekstraksi TF-IDF menghasilkan ribuan dimensi (kolom) yang berisiko memicu <em>Curse of Dimensionality</em>, di mana ruang fitur yang bertambah eksplosif membebankan komputasi algoritma pemelajaran mesin[cite: 1].</p>
+<p>Dengan menerapkan PCA (yang secara fundamental sejalan dengan metode reduksi matriks SVD), kita memampatkan matriks jarang (<em>sparse</em>) menjadi matriks padat (<em>dense</em>) berdimensi rendah, sekaligus mempertahankan pola informasi utama[cite: 1].</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
+
+<span class="c1"># Memisahkan target label dari fitur numerik</span>
+<span class="n">X_tfidf</span> <span class="o">=</span> <span class="n">df_tfidf</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'Label Kategori'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Mereduksi matriks menjadi 50 komponen utama</span>
+<span class="n">n_komponen</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_komponen</span><span class="p">)</span>
+<span class="n">pca_matrix</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_tfidf</span><span class="p">)</span>
+
+<span class="c1"># Format ulang ke DataFrame</span>
+<span class="n">kolom_pca</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">'PC</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">'</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_komponen</span><span class="p">)]</span>
+<span class="n">df_pca</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pca_matrix</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">kolom_pca</span><span class="p">)</span>
+<span class="n">df_pca</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">'Label Kategori'</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Label Kategori'</span><span class="p">])</span>
+
+<span class="c1"># Ekspor</span>
+<span class="n">df_pca</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">'pca_berita.csv'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Bentuk Matriks PCA: </span><span class="si">{</span><span class="n">df_pca</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> baris x </span><span class="si">{</span><span class="n">df_pca</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> komponen utama."</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_pca</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bentuk Matriks PCA: 200 baris x 51 komponen utama.
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Label Kategori</th>
+      <th>PC1</th>
+      <th>PC2</th>
+      <th>PC3</th>
+      <th>PC4</th>
+      <th>PC5</th>
+      <th>PC6</th>
+      <th>PC7</th>
+      <th>PC8</th>
+      <th>PC9</th>
+      <th>...</th>
+      <th>PC41</th>
+      <th>PC42</th>
+      <th>PC43</th>
+      <th>PC44</th>
+      <th>PC45</th>
+      <th>PC46</th>
+      <th>PC47</th>
+      <th>PC48</th>
+      <th>PC49</th>
+      <th>PC50</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SPORT</td>
+      <td>-0.002336</td>
+      <td>0.378591</td>
+      <td>-0.192355</td>
+      <td>0.061930</td>
+      <td>0.053859</td>
+      <td>0.074792</td>
+      <td>0.017405</td>
+      <td>0.000319</td>
+      <td>-0.040042</td>
+      <td>...</td>
+      <td>-0.075919</td>
+      <td>0.058082</td>
+      <td>-0.041233</td>
+      <td>0.085906</td>
+      <td>0.018591</td>
+      <td>-0.088471</td>
+      <td>0.070995</td>
+      <td>0.033440</td>
+      <td>0.013710</td>
+      <td>0.038654</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>SPORT</td>
+      <td>-0.081886</td>
+      <td>0.330859</td>
+      <td>-0.073224</td>
+      <td>0.088307</td>
+      <td>0.062741</td>
+      <td>0.104325</td>
+      <td>-0.064172</td>
+      <td>0.167255</td>
+      <td>-0.055915</td>
+      <td>...</td>
+      <td>-0.030056</td>
+      <td>0.015502</td>
+      <td>-0.034773</td>
+      <td>0.016818</td>
+      <td>0.059983</td>
+      <td>-0.018370</td>
+      <td>-0.007640</td>
+      <td>-0.015642</td>
+      <td>0.036046</td>
+      <td>-0.029633</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SPORT</td>
+      <td>-0.225481</td>
+      <td>0.080880</td>
+      <td>0.522169</td>
+      <td>0.204083</td>
+      <td>0.029647</td>
+      <td>0.064413</td>
+      <td>0.056673</td>
+      <td>-0.153121</td>
+      <td>-0.017215</td>
+      <td>...</td>
+      <td>0.038161</td>
+      <td>-0.019840</td>
+      <td>0.028938</td>
+      <td>0.057969</td>
+      <td>0.003934</td>
+      <td>-0.009487</td>
+      <td>-0.008773</td>
+      <td>-0.010378</td>
+      <td>0.046581</td>
+      <td>0.049721</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>SPORT</td>
+      <td>-0.013706</td>
+      <td>0.068602</td>
+      <td>-0.000187</td>
+      <td>-0.016075</td>
+      <td>-0.045793</td>
+      <td>-0.092166</td>
+      <td>0.036761</td>
+      <td>0.003022</td>
+      <td>0.076916</td>
+      <td>...</td>
+      <td>0.133031</td>
+      <td>-0.065142</td>
+      <td>0.010254</td>
+      <td>0.069223</td>
+      <td>-0.036667</td>
+      <td>-0.015460</td>
+      <td>0.177696</td>
+      <td>-0.024146</td>
+      <td>-0.010615</td>
+      <td>-0.192625</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>SPORT</td>
+      <td>-0.011071</td>
+      <td>0.150544</td>
+      <td>-0.058226</td>
+      <td>-0.010365</td>
+      <td>-0.038549</td>
+      <td>-0.119927</td>
+      <td>0.052920</td>
+      <td>-0.034091</td>
+      <td>0.138053</td>
+      <td>...</td>
+      <td>0.012426</td>
+      <td>0.059782</td>
+      <td>0.020596</td>
+      <td>0.012374</td>
+      <td>-0.038096</td>
+      <td>0.029024</td>
+      <td>-0.027990</td>
+      <td>0.030128</td>
+      <td>0.018565</td>
+      <td>-0.028225</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 51 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="visualisasi-pca-persebaran-data-berita">
+<h2>Visualisasi PCA: Persebaran Data Berita<a class="headerlink" href="#visualisasi-pca-persebaran-data-berita" title="Link to this heading">#</a></h2>
+<p>Setelah fitur TF-IDF direduksi menjadi beberapa komponen utama, kita memplot dua komponen utama pertama (PC1 dan PC2) agar pola distribusi data terlihat secara visual. Dengan PCA, data yang awalnya berdimensi tinggi dapat dilihat dalam ruang dua dimensi, sehingga kita dapat menilai apakah data SPORT dan FINANCE membentuk kelompok yang berbeda.</p>
+<ul class="simple">
+<li><p>Jika titik-titik dari dua kelas terpisah dengan jelas, maka fitur yang dihasilkan cukup kuat membedakan kategori berita.</p></li>
+<li><p>Semakin jauh jarak antar kelompok, semakin baik model dapat membedakan kelas berdasarkan kata kunci di teks.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="c1"># Mengatur ukuran kanvas grafik</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+<span class="c1"># Memplot dua komponen utama pertama (PC1 sebagai sumbu X, PC2 sebagai sumbu Y)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">df_pca</span><span class="p">,</span> 
+    <span class="n">x</span><span class="o">=</span><span class="s1">'PC1'</span><span class="p">,</span> 
+    <span class="n">y</span><span class="o">=</span><span class="s1">'PC2'</span><span class="p">,</span> 
+    <span class="n">hue</span><span class="o">=</span><span class="s1">'Label Kategori'</span><span class="p">,</span> 
+    <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s1">'#1f77b4'</span><span class="p">,</span> <span class="s1">'#ff7f0e'</span><span class="p">],</span> <span class="c1"># Biru untuk Sport, Oranye untuk Finance</span>
+    <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="c1"># Ukuran titik</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span> <span class="c1"># Transparansi agar titik yang bertumpuk terlihat</span>
+<span class="p">)</span>
+
+<span class="c1"># Menambahkan judul dan label sumbu</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Visualisasi PCA: Persebaran Data Berita Sport vs Finance'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Principal Component 1 (PC1)'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Principal Component 2 (PC2)'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+
+<span class="c1"># Menambahkan garis bantu (grid)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">'--'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+
+<span class="c1"># Merender dan menampilkan grafik ke layar</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/cc296afbd3a6cef08c987d0bfeeaba11bc85344a3e1afe84abeb7364c71b2521.png" src="_images/cc296afbd3a6cef08c987d0bfeeaba11bc85344a3e1afe84abeb7364c71b2521.png" />
+</div>
+</div>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="crawlingdata.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>CRAWLING DATA</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Skipgram.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Contoh latihan SKIP-GRAM</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>PREPROCESSING</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#prapemrosesan-data-teks-dan-ekstraksi-tf-idf">Prapemrosesan Data Teks dan Ekstraksi TF-IDF</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-fitur-tf-idf-term-frequency-inverse-document-frequency">Ekstraksi Fitur: TF-IDF (Term Frequency - Inverse Document Frequency)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-tf-idf-kata-unik-per-kelas">Visualisasi TF-IDF: Kata Unik per Kelas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduksi-dimensi-principal-component-analysis-pca">Reduksi Dimensi: Principal Component Analysis (PCA)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-pca-persebaran-data-berita">Visualisasi PCA: Persebaran Data Berita</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Angger Maulana Effendi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
