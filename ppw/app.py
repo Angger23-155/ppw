@@ -1,6 +1,6 @@
 """
 Klasifikasi Berita Detik.com (SPORT vs FINANCE)
-Skip-gram (Word2Vec) + Naive Bayes
+Pilihan metode: Skip-gram (Word2Vec) + GaussianNB  atau  TF-IDF + MultinomialNB
 
 Jalankan:  streamlit run app.py
 """
@@ -13,14 +13,18 @@ import joblib
 import numpy as np
 import streamlit as st
 import trafilatura
-import nltk
-from nltk.corpus import stopwords
-from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH_DEFAULT = os.path.join(APP_DIR, "model_skipgram_nb.pkl")
 
-# Pastikan dijalankan lewat `streamlit run app.py`, bukan `python app.py`
+METODE_SKIPGRAM = "Skip-gram + Naive Bayes"
+METODE_TFIDF = "TF-IDF + Naive Bayes"
+
+MODEL_DEFAULT = {
+    METODE_SKIPGRAM: os.path.join(APP_DIR, "model_skipgram_nb.pkl"),
+    METODE_TFIDF: os.path.join(APP_DIR, "model_tfidf_nb.pkl"),
+}
+
+# Pastikan dijalankan lewat `streamlit run app.py`
 try:
     from streamlit.runtime.scriptrunner import get_script_run_ctx
     _berjalan_di_streamlit = get_script_run_ctx() is not None
@@ -36,10 +40,19 @@ st.set_page_config(page_title="Klasifikasi Berita", page_icon="📰", layout="ce
 
 
 # ----------------------------------------------------------------------
-# 1. PREPROCESSING (HARUS SAMA PERSIS DENGAN NOTEBOOK)
+# 1. PREPROCESSING (HARUS SAMA PERSIS DENGAN YANG DIPAKAI SAAT LATIH MODEL)
+#    - Skip-gram : cleansing + case folding + tokenisasi
+#                  (TANPA stopword removal dan TANPA stemming)
+#    - TF-IDF    : cleansing + case folding + tokenisasi
+#                  + stopword removal + stemming
 # ----------------------------------------------------------------------
 @st.cache_resource(show_spinner="Menyiapkan stopword dan stemmer...")
 def siapkan_nlp():
+    """Hanya dipanggil pada jalur TF-IDF, jadi jalur Skip-gram tidak butuh NLTK/Sastrawi."""
+    import nltk
+    from nltk.corpus import stopwords
+    from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
+
     nltk.download("stopwords", quiet=True)
     stop = set(stopwords.words("indonesian")).union(set(stopwords.words("english")))
     stop |= {
@@ -58,21 +71,38 @@ def siapkan_nlp():
     return stop, stem_cached
 
 
-def bersihkan_teks(text):
-    stop, stem = siapkan_nlp()
+def bersihkan_teks(text, hapus_stopword=True, stemming=True):
     if not isinstance(text, str):
         return ""
-    text = re.sub(r"[^a-zA-Z\s]", " ", text).lower()
+    text = re.sub(r"[^a-zA-Z\s]", " ", text).lower()      # cleansing + case folding
     text = re.sub(r"\s+", " ", text).strip()
-    words = [w for w in text.split() if w not in stop and len(w) > 1]
-    return " ".join(stem(w) for w in words)
+    words = [w for w in text.split() if len(w) > 1]         # tokenisasi, buang token 1 huruf
+    if hapus_stopword:
+        stop, _ = siapkan_nlp()
+        words = [w for w in words if w not in stop]
+    if stemming:
+        _, stem = siapkan_nlp()
+        words = [stem(w) for w in words]
+    return " ".join(words)
+
+
+def praproses_tfidf(text):
+    return bersihkan_teks(text, hapus_stopword=True, stemming=True)
+
+
+def praproses_skipgram(text):
+    return bersihkan_teks(text, hapus_stopword=False, stemming=False)
 
 
 # ----------------------------------------------------------------------
 # 2. MEMUAT MODEL
 # ----------------------------------------------------------------------
 def _is_classifier(o):
-    return hasattr(o, "predict_proba") and hasattr(o, "classes_") or hasattr(o, "steps")
+    return (hasattr(o, "predict_proba") and hasattr(o, "classes_")) or hasattr(o, "steps")
+
+
+def _is_vectorizer(o):
+    return hasattr(o, "transform") and hasattr(o, "vocabulary_")
 
 
 def _is_wordvectors(o):
@@ -81,27 +111,33 @@ def _is_wordvectors(o):
     return hasattr(o, "vector_size") and hasattr(o, "__contains__") and hasattr(o, "__getitem__")
 
 
-def _ambil_komponen(obj):
-    """Cari classifier dan word-vectors dari berbagai kemungkinan format .pkl."""
-    kandidat = []
+def _daftar_kandidat(obj):
     if isinstance(obj, dict):
-        kandidat = list(obj.values())
-    elif isinstance(obj, (list, tuple)):
-        kandidat = list(obj)
-    else:
-        kandidat = [obj]
-
-    clf = next((o for o in kandidat if _is_classifier(o)), None)
-    w2v = next((o for o in kandidat if _is_wordvectors(o)), None)
-    if w2v is not None and hasattr(w2v, "wv"):
-        w2v = w2v.wv
-    return clf, w2v
+        return list(obj.values())
+    if isinstance(obj, (list, tuple)):
+        return list(obj)
+    return [obj]
 
 
 @st.cache_resource(show_spinner="Memuat model...")
-def muat_model(path):
+def muat_model(path, metode):
+    """Kembalikan dict komponen model.
+    Skip-gram -> {'clf', 'wv'}      TF-IDF -> {'clf', 'vectorizer'}"""
     obj = joblib.load(path)
-    clf, wv = _ambil_komponen(obj)
+    kandidat = _daftar_kandidat(obj)
+
+    if metode == METODE_TFIDF:
+        # Bisa berupa dict {'vectorizer', 'clf'} atau sklearn Pipeline(tfidf, nb)
+        if hasattr(obj, "steps") and len(obj.steps) >= 2 and _is_vectorizer(obj.steps[0][1]):
+            return {"vectorizer": obj.steps[0][1], "clf": obj.steps[-1][1]}
+        vec = next((o for o in kandidat if _is_vectorizer(o)), None)
+        clf = next((o for o in kandidat if _is_classifier(o)), None)
+        return {"vectorizer": vec, "clf": clf}
+
+    clf = next((o for o in kandidat if _is_classifier(o)), None)
+    wv = next((o for o in kandidat if _is_wordvectors(o)), None)
+    if wv is not None and hasattr(wv, "wv"):
+        wv = wv.wv
 
     # Jika .pkl hanya berisi classifier, coba cari model Skip-gram terpisah
     if wv is None:
@@ -116,8 +152,7 @@ def muat_model(path):
                 except Exception:
                     wv = KeyedVectors.load(p)
                 break
-
-    return clf, wv
+    return {"clf": clf, "wv": wv}
 
 
 def doc_vector(tokens, wv):
@@ -146,13 +181,7 @@ def ambil_berita(url):
 # ----------------------------------------------------------------------
 # 4. KLASIFIKASI
 # ----------------------------------------------------------------------
-def klasifikasi(judul, isi, clf, wv):
-    teks_bersih = bersihkan_teks(f"{judul} {isi}")
-    tokens = teks_bersih.split()
-    dikenal = [t for t in tokens if t in wv]
-    if not dikenal:
-        return None
-    vec = doc_vector(tokens, wv).reshape(1, -1)
+def _susun_hasil(clf, vec, teks_bersih, tokens, dikenal, keterangan):
     proba = clf.predict_proba(vec)[0]
     kelas = list(clf.classes_)
     return {
@@ -161,25 +190,69 @@ def klasifikasi(judul, isi, clf, wv):
         "n_token": len(tokens),
         "n_dikenal": len(dikenal),
         "teks_bersih": teks_bersih,
+        "keterangan": keterangan,
     }
+
+
+def klasifikasi_skipgram(teks, clf, wv):
+    teks_bersih = praproses_skipgram(teks)            # tanpa stopword removal & stemming
+    tokens = teks_bersih.split()
+    dikenal = [t for t in tokens if t in wv]
+    if not dikenal:
+        return None
+    vec = doc_vector(tokens, wv).reshape(1, -1)       # rata-rata vektor kata Skip-gram
+    return _susun_hasil(clf, vec, teks_bersih, tokens, dikenal,
+                        "cleansing + case folding + tokenisasi (tanpa stopword removal dan stemming)")
+
+
+def klasifikasi_tfidf(teks, clf, vectorizer):
+    teks_bersih = praproses_tfidf(teks)               # dengan stopword removal & stemming
+    tokens = teks_bersih.split()
+    kosakata = vectorizer.vocabulary_
+    dikenal = [t for t in tokens if t in kosakata]
+    if not dikenal:
+        return None
+    vec = vectorizer.transform([teks_bersih])         # vektor TF-IDF (sparse)
+    return _susun_hasil(clf, vec, teks_bersih, tokens, dikenal,
+                        "cleansing + case folding + tokenisasi + stopword removal + stemming")
+
+
+def klasifikasi(judul, isi, metode, komponen):
+    teks = f"{judul} {isi}"
+    if metode == METODE_TFIDF:
+        return klasifikasi_tfidf(teks, komponen["clf"], komponen["vectorizer"])
+    return klasifikasi_skipgram(teks, komponen["clf"], komponen["wv"])
 
 
 # ----------------------------------------------------------------------
 # 5. ANTARMUKA
 # ----------------------------------------------------------------------
 st.title("📰 Klasifikasi Berita Detik.com")
-st.caption("Model: Skip-gram (Word2Vec) + Naive Bayes · Kelas: SPORT / FINANCE")
 
 with st.sidebar:
     st.header("Pengaturan")
-    model_path = st.text_input("Lokasi file model (.pkl)", MODEL_PATH_DEFAULT)
+    metode = st.radio(
+        "Metode representasi teks",
+        [METODE_SKIPGRAM, METODE_TFIDF],
+        help="Skip-gram: vektor kata Word2Vec dirata-rata per berita. "
+             "TF-IDF: bobot kata pada kosakata hasil latihan.",
+    )
+    model_path = st.text_input("Lokasi file model (.pkl)", MODEL_DEFAULT[metode], key=f"path_{metode}")
+    if metode == METODE_SKIPGRAM:
+        st.caption("Preprocessing: cleansing, case folding, tokenisasi. "
+                   "**Tanpa** stopword removal dan stemming.")
+    else:
+        st.caption("Preprocessing: cleansing, case folding, tokenisasi, "
+                   "stopword removal, dan stemming (Sastrawi).")
     st.markdown(
         "Model dilatih hanya dari berita **detik.com** kategori **sport** dan "
         "**finance**. Berita dari topik lain tetap akan dipaksa masuk ke salah satu "
         "dari dua kelas tersebut."
     )
 
-clf, wv = None, None
+st.caption(f"Metode aktif: {metode} · Kelas: SPORT / FINANCE")
+
+komponen = None
 
 # Jika diisi nama file saja, cari relatif ke folder app.py
 if not os.path.isabs(model_path) and not os.path.exists(model_path):
@@ -191,31 +264,39 @@ if not os.path.exists(model_path):
     st.stop()
 
 try:
-    clf, wv = muat_model(model_path)
+    komponen = muat_model(model_path, metode)
 except Exception as e:
     st.error(f"Gagal memuat model: {e}")
     st.info("Pastikan versi scikit-learn dan gensim sama dengan yang dipakai saat model disimpan.")
     st.stop()
 
-if clf is None:
+if komponen.get("clf") is None:
     st.error("Classifier Naive Bayes tidak ditemukan di dalam file .pkl.")
     st.stop()
-if wv is None:
+if metode == METODE_SKIPGRAM and komponen.get("wv") is None:
     st.error(
-        "Model Skip-gram tidak ditemukan. File .pkl harus memuat model Skip-gram "
-        "(Word2Vec/KeyedVectors) bersama classifier-nya. Lihat petunjuk cara menyimpan "
-        "model yang benar."
+        "Model Skip-gram tidak ditemukan. File .pkl harus memuat vektor kata Skip-gram "
+        "(Word2Vec/KeyedVectors) bersama classifier-nya: "
+        "`joblib.dump({'wv': model_sg.wv, 'clf': gnb_final}, 'model_skipgram_nb.pkl')`."
+    )
+    st.stop()
+if metode == METODE_TFIDF and komponen.get("vectorizer") is None:
+    st.error(
+        "TfidfVectorizer tidak ditemukan di file .pkl. File ini harus memuat vectorizer "
+        "bersama classifier-nya: "
+        "`joblib.dump({'vectorizer': tfidf_final, 'clf': mnb_final}, 'model_tfidf_nb.pkl')`."
     )
     st.stop()
 
 tab_link, tab_teks = st.tabs(["🔗 Dari link", "✍️ Tempel teks manual"])
 
 judul, isi = "", ""
-jalankan = False
+berita_baru = False
 
 with tab_link:
     url = st.text_input("Link berita", placeholder="https://finance.detik.com/...")
     if st.button("Klasifikasikan", type="primary", key="btn_link"):
+        st.session_state.pop("berita", None)
         if not url.strip():
             st.warning("Masukkan link berita terlebih dahulu.")
         elif not urlparse(url).scheme.startswith("http"):
@@ -226,7 +307,7 @@ with tab_link:
             try:
                 with st.spinner("Mengunduh dan mengekstrak berita..."):
                     judul, isi = ambil_berita(url.strip())
-                jalankan = True
+                berita_baru = True
             except ValueError as e:
                 st.error(str(e))
                 st.caption("Jika terus gagal, gunakan tab 'Tempel teks manual'.")
@@ -235,14 +316,21 @@ with tab_teks:
     judul_manual = st.text_input("Judul (opsional)")
     isi_manual = st.text_area("Isi berita", height=200)
     if st.button("Klasifikasikan", type="primary", key="btn_teks"):
+        st.session_state.pop("berita", None)
         if len(isi_manual.strip()) < 30:
             st.warning("Isi berita terlalu pendek.")
         else:
-            judul, isi, jalankan = judul_manual, isi_manual, True
+            judul, isi, berita_baru = judul_manual, isi_manual, True
 
-if jalankan:
+# Berita disimpan di session_state agar saat metode diganti di sidebar,
+# berita yang sama langsung diklasifikasikan ulang tanpa mengunduh lagi.
+if berita_baru:
+    st.session_state["berita"] = (judul, isi)
+
+if "berita" in st.session_state:
+    judul, isi = st.session_state["berita"]
     with st.spinner("Memproses teks dan mengklasifikasikan..."):
-        hasil = klasifikasi(judul, isi, clf, wv)
+        hasil = klasifikasi(judul, isi, metode, komponen)
 
     st.divider()
     if hasil is None:
@@ -250,6 +338,7 @@ if jalankan:
     else:
         ikon = {"SPORT": "⚽", "FINANCE": "💹"}.get(hasil["label"], "📰")
         st.subheader(f"{ikon} Prediksi: {hasil['label']}")
+        st.caption(f"Metode: {metode}")
 
         for kelas, p in sorted(hasil["proba"].items(), key=lambda x: -x[1]):
             st.write(f"**{kelas}** — {p:.1%}")
@@ -270,4 +359,5 @@ if jalankan:
         with st.expander("Pratinjau isi berita"):
             st.write(isi[:1500] + ("..." if len(isi) > 1500 else ""))
         with st.expander("Teks setelah preprocessing"):
+            st.caption(f"Langkah: {hasil['keterangan']}")
             st.write(hasil["teks_bersih"])
