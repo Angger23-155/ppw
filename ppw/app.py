@@ -303,7 +303,7 @@ with tab_link:
             st.warning("Link harus diawali http:// atau https://")
         else:
             if "detik.com" not in urlparse(url).netloc:
-                st.info("Link ini bukan dari detik.com. Hasil bisa kurang akurat karena model dilatih dari detik.com.")
+                st.info("Link ini bukan dari detik.com🗿. Hasil bisa kurang akurat karena model dilatih dari detik.com.")
             try:
                 with st.spinner("Mengunduh dan mengekstrak berita..."):
                     judul, isi = ambil_berita(url.strip())
