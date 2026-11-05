@@ -10,6 +10,7 @@ chapters:
   sections:
     - file: Skipgram
 - file: klasifikasi
+- file: graf
 #   sections:
 #     - file: crawl
 #     - file: preProcessing
