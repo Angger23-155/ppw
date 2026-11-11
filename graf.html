@@ -1,0 +1,889 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>GRAF &#8212; Pencarian dan Penambangan Web</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=6a604523" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="_static/design-tabs.js?v=fcb327ea"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'graf';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="KLASIFIKASI" href="klasifikasi.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/profil.jpg" class="logo__image only-light" alt="Pencarian dan Penambangan Web - Home"/>
+    <img src="_static/profil.jpg" class="logo__image only-dark pst-js-only" alt="Pencarian dan Penambangan Web - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pengantarwebmining.html"><strong>PENGANTAR WEB MINING</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="crawlingdata.html"><strong>CRAWLING DATA</strong></a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html"><strong>PREPROCESSING</strong></a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="klasifikasi.html"><strong>KLASIFIKASI</strong></a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>GRAF</strong></a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fgraf.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/graf.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>GRAF</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>GRAF</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-graf-5-vertex-berarah-tidak-berarah">Analisis Graf: 5 Vertex (Berarah &amp; Tidak Berarah)</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-metrik-graf-tidak-berarah-undirected-graph">2. Analisis Metrik Graf Tidak Berarah (Undirected Graph)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-metrik-graf-berarah-directed-graph-digraph">3. Analisis Metrik Graf Berarah (Directed Graph / Digraph)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-dan-interpretasi-metrik">4. Kesimpulan dan Interpretasi Metrik</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-karakteristik-graf-tidak-berarah-undirected-graph">A. Karakteristik Graf Tidak Berarah (Undirected Graph)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-karakteristik-graf-berarah-directed-graph">B. Karakteristik Graf Berarah (Directed Graph)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="graf">
+<h1><strong>GRAF</strong><a class="headerlink" href="#graf" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="analisis-graf-5-vertex-berarah-tidak-berarah">
+<h1>Analisis Graf: 5 Vertex (Berarah &amp; Tidak Berarah)<a class="headerlink" href="#analisis-graf-5-vertex-berarah-tidak-berarah" title="Link to this heading">#</a></h1>
+<p>Dokumen notebook ini berisi implementasi lengkap pembuatan <strong>Graf Tidak Berarah (Undirected Graph)</strong> dan <strong>Graf Berarah (Directed Graph)</strong> dengan 5 vertex (simpul) menggunakan pustaka <code class="docutils literal notranslate"><span class="pre">networkx</span></code> dan <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>.</p>
+<p>Seluruh metrik dihitung sesuai instruksi tugas:</p>
+<ol class="arabic simple">
+<li><p>Visualisasi Graf (Berarah &amp; Tidak Berarah)</p></li>
+<li><p>Degree (Derajat) per Vertex (termasuk In-Degree &amp; Out-Degree untuk graf berarah)</p></li>
+<li><p>Rata-Rata Degree (Average Degree)</p></li>
+<li><p>Distribusi Derajat (Degree Distribution)</p></li>
+<li><p>Kepadatan Graf (Graph Density)</p></li>
+<li><p>Koefisien Klasterisasi (Clustering Coefficient) per Vertex</p></li>
+<li><p>Rata-Rata Lintasan Terpendek (Average Shortest Path Length)</p></li>
+<li><p>Matriks Ketetanggaan (Adjacency Matrix)</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">collections</span>
+
+<span class="c1"># Inisialisasi Kanvas Visualisasi Side-by-Side</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># 1. Graf Tidak Berarah (Undirected Graph - 5 Vertex)</span>
+<span class="n">G_undirected</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">edges_undirected</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="n">G_undirected</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+<span class="n">G_undirected</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">edges_undirected</span><span class="p">)</span>
+
+<span class="n">pos_u</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G_undirected</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"1. Graf Tidak Berarah (5 Vertex)"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G_undirected</span><span class="p">,</span> <span class="n">pos_u</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> 
+        <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">'skyblue'</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> 
+        <span class="n">font_size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="c1"># 2. Graf Berarah (Directed Graph - 5 Vertex)</span>
+<span class="c1"># Dibuat Strongly Connected agar Average Shortest Path Length dapat dihitung</span>
+<span class="n">G_directed</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+<span class="n">edges_directed</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="n">G_directed</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+<span class="n">G_directed</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">edges_directed</span><span class="p">)</span>
+
+<span class="n">pos_d</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G_directed</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"2. Graf Berarah (5 Vertex)"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G_directed</span><span class="p">,</span> <span class="n">pos_d</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> 
+        <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">'lightgreen'</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> 
+        <span class="n">font_size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">,</span> 
+        <span class="n">arrows</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">arrowsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a086d507e020a985df7aa2a5b6b72d6827eb9de18b1fbc55c17463d3250f54fd.png" src="_images/a086d507e020a985df7aa2a5b6b72d6827eb9de18b1fbc55c17463d3250f54fd.png" />
+</div>
+</div>
+<section id="analisis-metrik-graf-tidak-berarah-undirected-graph">
+<h2>2. Analisis Metrik Graf Tidak Berarah (Undirected Graph)<a class="headerlink" href="#analisis-metrik-graf-tidak-berarah-undirected-graph" title="Link to this heading">#</a></h2>
+<p>Pada sel berikut dilakukan perhitungan seluruh metrik untuk graf tidak berarah:</p>
+<ul class="simple">
+<li><p><strong>Degree per Vertex</strong>: Jumlah sisi terhubung pada tiap simpul.</p></li>
+<li><p><strong>Rata-Rata Degree</strong>: Total derajat dibagi jumlah vertex (<span class="math notranslate nohighlight">\(N=5\)</span>).</p></li>
+<li><p><strong>Distribusi Derajat</strong>: Frekuensi kemunculan nilai derajat dalam bentuk tabel dan diagram batang.</p></li>
+<li><p><strong>Graph Density</strong>: Perbandingan sisi aktual dengan sisi maksimum yang mungkin (<span class="math notranslate nohighlight">\(\frac{2E}{N(N-1)}\)</span>).</p></li>
+<li><p><strong>Koefisien Klasterisasi per Vertex</strong>: Mengukur kecenderungan tetangga simpul untuk saling terhubung membentuk segitiga.</p></li>
+<li><p><strong>Rata-Rata Lintasan Terpendek</strong>: Rata-rata jarak terpendek antar seluruh pasangan vertex.</p></li>
+<li><p><strong>Adjacency Matrix</strong>: Matriks biner <span class="math notranslate nohighlight">\(5 \times 5\)</span> koneksi antar vertex.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"=================================================="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"     METRIK GRAF TIDAK BERARAH (UNDIRECTED GRAPH)  "</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"==================================================</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># A. Degree Masing-Masing Vertex</span>
+<span class="n">deg_u</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">G_undirected</span><span class="o">.</span><span class="n">degree</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"1. Degree Masing-Masing Vertex:"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">deg_u</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   - Vertex </span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="s2"> sisi"</span><span class="p">)</span>
+
+<span class="c1"># B. Rata-Rata Degree</span>
+<span class="n">avg_deg_u</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">deg_u</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">/</span> <span class="n">G_undirected</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">2. Rata-Rata Degree: </span><span class="si">{</span><span class="n">avg_deg_u</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># C. Distribusi Derajat (Text &amp; Plot)</span>
+<span class="n">deg_seq_u</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">G_undirected</span><span class="o">.</span><span class="n">degree</span><span class="p">()]</span>
+<span class="n">deg_count_u</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">Counter</span><span class="p">(</span><span class="n">deg_seq_u</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">3. Distribusi Derajat:"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">d_val</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">deg_count_u</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   - Degree </span><span class="si">{</span><span class="n">d_val</span><span class="si">}</span><span class="s2">: muncul pada </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> vertex"</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">deg_count_u</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="nb">list</span><span class="p">(</span><span class="n">deg_count_u</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="n">color</span><span class="o">=</span><span class="s1">'skyblue'</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">'black'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Distribusi Derajat (Undirected Graph)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Degree"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Frekuensi (Jumlah Vertex)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">deg_count_u</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">deg_count_u</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">+</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">'y'</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">'--'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># D. Density Graph</span>
+<span class="n">density_u</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">density</span><span class="p">(</span><span class="n">G_undirected</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"4. Density Graph: </span><span class="si">{</span><span class="n">density_u</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># E. Koefisien Klasterisasi Masing-Masing Vertex</span>
+<span class="n">cluster_u</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">clustering</span><span class="p">(</span><span class="n">G_undirected</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">5. Koefisien Klasterisasi Masing-Masing Vertex:"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">cluster_u</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   - Vertex </span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">c</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># F. Rata-Rata Lintasan Terpendek (Average Shortest Path Length)</span>
+<span class="n">avg_sp_u</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">average_shortest_path_length</span><span class="p">(</span><span class="n">G_undirected</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">6. Rata-Rata Lintasan Terpendek (Avg Shortest Path Length): </span><span class="si">{</span><span class="n">avg_sp_u</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># G. Matriks Ketetanggaan (Adjacency Matrix)</span>
+<span class="n">adj_u</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">G_undirected</span><span class="p">)</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">7. Matriks Ketetanggaan (Adjacency Matrix 5x5):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">adj_u</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==================================================
+     METRIK GRAF TIDAK BERARAH (UNDIRECTED GRAPH)  
+==================================================
+
+1. Degree Masing-Masing Vertex:
+   - Vertex 1: 3 sisi
+   - Vertex 2: 3 sisi
+   - Vertex 3: 3 sisi
+   - Vertex 4: 3 sisi
+   - Vertex 5: 2 sisi
+
+2. Rata-Rata Degree: 2.80
+
+3. Distribusi Derajat:
+   - Degree 2: muncul pada 1 vertex
+   - Degree 3: muncul pada 4 vertex
+</pre></div>
+</div>
+<img alt="_images/5ab2814bcd5886bd322e2164af492e2948c99075f151582eb08ac27561fa41ee.png" src="_images/5ab2814bcd5886bd322e2164af492e2948c99075f151582eb08ac27561fa41ee.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4. Density Graph: 0.7000
+
+5. Koefisien Klasterisasi Masing-Masing Vertex:
+   - Vertex 1: 0.3333
+   - Vertex 2: 0.6667
+   - Vertex 3: 0.6667
+   - Vertex 4: 0.3333
+   - Vertex 5: 0.0000
+
+6. Rata-Rata Lintasan Terpendek (Avg Shortest Path Length): 1.3000
+
+7. Matriks Ketetanggaan (Adjacency Matrix 5x5):
+[[0 1 1 0 1]
+ [1 0 1 1 0]
+ [1 1 0 1 0]
+ [0 1 1 0 1]
+ [1 0 0 1 0]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="analisis-metrik-graf-berarah-directed-graph-digraph">
+<h2>3. Analisis Metrik Graf Berarah (Directed Graph / Digraph)<a class="headerlink" href="#analisis-metrik-graf-berarah-directed-graph-digraph" title="Link to this heading">#</a></h2>
+<p>Pada sel berikut dilakukan perhitungan seluruh metrik untuk graf berarah:</p>
+<ul class="simple">
+<li><p><strong>Degree per Vertex</strong>: Membedakan <strong>In-Degree</strong> (sisi masuk), <strong>Out-Degree</strong> (sisi keluar), dan <strong>Total Degree</strong>.</p></li>
+<li><p><strong>Rata-Rata Degree</strong>: Rata-rata In-Degree, Out-Degree, dan Total Degree.</p></li>
+<li><p><strong>Distribusi Derajat</strong>: Frekuensi total derajat pada graf berarah.</p></li>
+<li><p><strong>Graph Density</strong>: Perbandingan sisi berarah aktual dengan kapasitas maksimum (<span class="math notranslate nohighlight">\(N(N-1)\)</span>).</p></li>
+<li><p><strong>Koefisien Klasterisasi per Vertex</strong>: Mengukur kecenderungan hubungan bertetangga pada graf berarah (directed clustering).</p></li>
+<li><p><strong>Rata-Rata Lintasan Terpendek</strong>: Rata-rata lintasan terpendek dengan memperhatikan arah panah.</p></li>
+<li><p><strong>Adjacency Matrix</strong>: Matriks <span class="math notranslate nohighlight">\(5 \times 5\)</span> di mana entri <span class="math notranslate nohighlight">\((i, j) = 1\)</span> menunjukkan adanya panah dari vertex <span class="math notranslate nohighlight">\(i\)</span> ke vertex <span class="math notranslate nohighlight">\(j\)</span>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"=================================================="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"       METRIK GRAF BERARAH (DIRECTED GRAPH)       "</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"==================================================</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># A. Degree Masing-Masing Vertex (In, Out, Total)</span>
+<span class="n">in_deg_d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">G_directed</span><span class="o">.</span><span class="n">in_degree</span><span class="p">())</span>
+<span class="n">out_deg_d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">G_directed</span><span class="o">.</span><span class="n">out_degree</span><span class="p">())</span>
+<span class="n">tot_deg_d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">G_directed</span><span class="o">.</span><span class="n">degree</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"1. Degree Masing-Masing Vertex:"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">G_directed</span><span class="o">.</span><span class="n">nodes</span><span class="p">()):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   - Vertex </span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2">: Total Degree = </span><span class="si">{</span><span class="n">tot_deg_d</span><span class="p">[</span><span class="n">node</span><span class="p">]</span><span class="si">}</span><span class="s2"> | In-Degree = </span><span class="si">{</span><span class="n">in_deg_d</span><span class="p">[</span><span class="n">node</span><span class="p">]</span><span class="si">}</span><span class="s2"> | Out-Degree = </span><span class="si">{</span><span class="n">out_deg_d</span><span class="p">[</span><span class="n">node</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># B. Rata-Rata Degree</span>
+<span class="n">avg_tot_deg_d</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">tot_deg_d</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">/</span> <span class="n">G_directed</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span>
+<span class="n">avg_in_deg_d</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">in_deg_d</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">/</span> <span class="n">G_directed</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span>
+<span class="n">avg_out_deg_d</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">out_deg_d</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">/</span> <span class="n">G_directed</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">2. Rata-Rata Degree:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   - Rata-Rata Total Degree : </span><span class="si">{</span><span class="n">avg_tot_deg_d</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   - Rata-Rata In-Degree   : </span><span class="si">{</span><span class="n">avg_in_deg_d</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   - Rata-Rata Out-Degree  : </span><span class="si">{</span><span class="n">avg_out_deg_d</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># C. Distribusi Derajat (Total Degree)</span>
+<span class="n">deg_seq_d</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">G_directed</span><span class="o">.</span><span class="n">degree</span><span class="p">()]</span>
+<span class="n">deg_count_d</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">Counter</span><span class="p">(</span><span class="n">deg_seq_d</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">3. Distribusi Total Degree:"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">d_val</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">deg_count_d</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   - Degree </span><span class="si">{</span><span class="n">d_val</span><span class="si">}</span><span class="s2">: muncul pada </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> vertex"</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">deg_count_d</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="nb">list</span><span class="p">(</span><span class="n">deg_count_d</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="n">color</span><span class="o">=</span><span class="s1">'lightgreen'</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">'black'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Distribusi Total Degree (Directed Graph)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Total Degree"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Frekuensi (Jumlah Vertex)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">deg_count_d</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">deg_count_d</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">+</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">'y'</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">'--'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># D. Density Graph</span>
+<span class="n">density_d</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">density</span><span class="p">(</span><span class="n">G_directed</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"4. Density Graph: </span><span class="si">{</span><span class="n">density_d</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># E. Koefisien Klasterisasi Masing-Masing Vertex</span>
+<span class="n">cluster_d</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">clustering</span><span class="p">(</span><span class="n">G_directed</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">5. Koefisien Klasterisasi Masing-Masing Vertex:"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">cluster_d</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   - Vertex </span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">c</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># F. Rata-Rata Lintasan Terpendek (Average Shortest Path Length)</span>
+<span class="n">avg_sp_d</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">average_shortest_path_length</span><span class="p">(</span><span class="n">G_directed</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">6. Rata-Rata Lintasan Terpendek (Avg Shortest Path Length): </span><span class="si">{</span><span class="n">avg_sp_d</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># G. Matriks Ketetanggaan (Adjacency Matrix)</span>
+<span class="n">adj_d</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">G_directed</span><span class="p">)</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">7. Matriks Ketetanggaan (Adjacency Matrix 5x5):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">adj_d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==================================================
+       METRIK GRAF BERARAH (DIRECTED GRAPH)       
+==================================================
+
+1. Degree Masing-Masing Vertex:
+   - Vertex 1: Total Degree = 3 | In-Degree = 2 | Out-Degree = 1
+   - Vertex 2: Total Degree = 3 | In-Degree = 1 | Out-Degree = 2
+   - Vertex 3: Total Degree = 3 | In-Degree = 2 | Out-Degree = 1
+   - Vertex 4: Total Degree = 3 | In-Degree = 1 | Out-Degree = 2
+   - Vertex 5: Total Degree = 2 | In-Degree = 1 | Out-Degree = 1
+
+2. Rata-Rata Degree:
+   - Rata-Rata Total Degree : 2.80
+   - Rata-Rata In-Degree   : 1.40
+   - Rata-Rata Out-Degree  : 1.40
+
+3. Distribusi Total Degree:
+   - Degree 2: muncul pada 1 vertex
+   - Degree 3: muncul pada 4 vertex
+</pre></div>
+</div>
+<img alt="_images/7100f39c91de36bbde9c0fc221bb63354cb8af8261a74a4d2c205dab29347c74.png" src="_images/7100f39c91de36bbde9c0fc221bb63354cb8af8261a74a4d2c205dab29347c74.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4. Density Graph: 0.3500
+
+5. Koefisien Klasterisasi Masing-Masing Vertex:
+   - Vertex 1: 0.1667
+   - Vertex 2: 0.3333
+   - Vertex 3: 0.3333
+   - Vertex 4: 0.1667
+   - Vertex 5: 0.0000
+
+6. Rata-Rata Lintasan Terpendek (Avg Shortest Path Length): 2.0000
+
+7. Matriks Ketetanggaan (Adjacency Matrix 5x5):
+[[0 1 0 0 0]
+ [0 0 1 1 0]
+ [1 0 0 0 0]
+ [0 0 1 0 1]
+ [1 0 0 0 0]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="kesimpulan-dan-interpretasi-metrik">
+<h2>4. Kesimpulan dan Interpretasi Metrik<a class="headerlink" href="#kesimpulan-dan-interpretasi-metrik" title="Link to this heading">#</a></h2>
+<p>Berdasarkan hasil komputasi metrik pada graf 5 vertex di atas (baik yang tidak berarah maupun berarah), berikut adalah interpretasi dari angka-angka yang dihasilkan:</p>
+<section id="a-karakteristik-graf-tidak-berarah-undirected-graph">
+<h3>A. Karakteristik Graf Tidak Berarah (Undirected Graph)<a class="headerlink" href="#a-karakteristik-graf-tidak-berarah-undirected-graph" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Degree &amp; Distribusi:</strong> Kita dapat melihat vertex mana yang bertindak sebagai <em>hub</em> (pusat koneksi). Vertex dengan <em>degree</em> tertinggi adalah titik yang paling krusial dalam graf ini.</p></li>
+<li><p><strong>Kepadatan (Density):</strong> Nilai <em>density</em> menunjukkan seberapa terhubung jaringan ini dibandingkan dengan potensi maksimalnya. Semakin mendekati 1, semakin padat graf tersebut (<em>dense</em>), dan jika mendekati 0 disebut graf renggang (<em>sparse</em>).</p></li>
+<li><p><strong>Koefisien Klasterisasi:</strong> Menunjukkan seberapa kuat komunitas yang terbentuk. Jika nilainya 0 pada suatu vertex, berarti tidak ada satupun tetangganya yang saling terhubung satu sama lain.</p></li>
+<li><p><strong>Rata-Rata Lintasan Terpendek:</strong> Menunjukkan rata-rata “langkah” atau <em>hops</em> yang dibutuhkan untuk berpindah dari satu vertex ke vertex lain. Angka yang kecil menandakan komunikasi/aliran informasi dalam jaringan ini sangat cepat (efek <em>small-world</em>).</p></li>
+</ol>
+</section>
+<section id="b-karakteristik-graf-berarah-directed-graph">
+<h3>B. Karakteristik Graf Berarah (Directed Graph)<a class="headerlink" href="#b-karakteristik-graf-berarah-directed-graph" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>In-Degree dan Out-Degree:</strong></p>
+<ul class="simple">
+<li><p>Vertex dengan <strong>In-Degree</strong> tinggi mengindikasikan popularitas atau tujuan aliran informasi (sebagai <em>sink</em> atau penerima).</p></li>
+<li><p>Vertex dengan <strong>Out-Degree</strong> tinggi menunjukkan sumber pengaruh atau penyebar informasi utama (sebagai <em>source</em>).</p></li>
+</ul>
+</li>
+<li><p><strong>Adjacency Matrix (Matriks Ketetanggaan):</strong> Berbeda dengan graf tidak berarah yang matriksnya simetris (cermin di garis diagonal), matriks pada graf berarah cenderung <strong>tidak simetris</strong> karena koneksi <span class="math notranslate nohighlight">\(A \rightarrow B\)</span> tidak menjamin adanya koneksi <span class="math notranslate nohighlight">\(B \rightarrow A\)</span>.</p></li>
+<li><p><strong>Rata-Rata Lintasan Terpendek:</strong> Terkadang jalurnya bisa lebih panjang dari graf tidak berarah, karena pergerakan dibatasi secara ketat oleh arah panah.</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="klasifikasi.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>KLASIFIKASI</strong></p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>GRAF</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-graf-5-vertex-berarah-tidak-berarah">Analisis Graf: 5 Vertex (Berarah &amp; Tidak Berarah)</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-metrik-graf-tidak-berarah-undirected-graph">2. Analisis Metrik Graf Tidak Berarah (Undirected Graph)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-metrik-graf-berarah-directed-graph-digraph">3. Analisis Metrik Graf Berarah (Directed Graph / Digraph)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-dan-interpretasi-metrik">4. Kesimpulan dan Interpretasi Metrik</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-karakteristik-graf-tidak-berarah-undirected-graph">A. Karakteristik Graf Tidak Berarah (Undirected Graph)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-karakteristik-graf-berarah-directed-graph">B. Karakteristik Graf Berarah (Directed Graph)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Angger Maulana Effendi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
