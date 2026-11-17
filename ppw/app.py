@@ -67,7 +67,7 @@ if "analysis_results" not in st.session_state:
 
 # Header Aplikasi
 st.markdown('<div class="main-title">🕸️ Web Crawling & Analisis Algoritma PageRank</div>', unsafe_allow_html=True)
-st.markdown('<div class="author-badge">👨‍💻 Angger Nur Kuncoro (NIM: 230411100155) • Teknik Informatika • Web Structure Mining</div>', unsafe_allow_html=True)
+st.markdown('<div class="author-badge">👨‍💻 Angger Maulana Effendi (NIM: 230411100155) • Teknik Informatika • Web Structure Mining</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-title">Sistem penambangan struktur web terintegrasi: Ekstraksi relasi hyperlink secara rekursif, pemodelan topologi graf, dan perankingan website terpenting menggunakan PageRank.</div>', unsafe_allow_html=True)
 
 # ================= SIDEBAR KONFIGURASI =================
