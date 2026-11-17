@@ -6,3 +6,8 @@ joblib
 nltk
 Sastrawi
 trafilatura
+beautifulsoup4
+requests
+networkx
+pyvis
+pandas

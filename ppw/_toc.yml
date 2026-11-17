@@ -11,6 +11,7 @@ chapters:
     - file: Skipgram
 - file: klasifikasi
 - file: graf
+- file: crawling_pagerank
 #   sections:
 #     - file: crawl
 #     - file: preProcessing

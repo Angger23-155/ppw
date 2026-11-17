@@ -1,363 +1,447 @@
-"""
-Klasifikasi Berita Detik.com (SPORT vs FINANCE)
-Pilihan metode: Skip-gram (Word2Vec) + GaussianNB  atau  TF-IDF + MultinomialNB
-
-Jalankan:  streamlit run app.py
-"""
-import os
-import re
-from functools import lru_cache
-from urllib.parse import urlparse
-
-import joblib
-import numpy as np
 import streamlit as st
-import trafilatura
+import pandas as pd
+import numpy as np
+import time
+import json
+import streamlit.components.v1 as components
 
-APP_DIR = os.path.dirname(os.path.abspath(__file__))
+from crawler import WebCrawler, normalize_url, is_valid_http_url
+from pagerank import analyze_and_compare, HAS_NETWORKX
+from visualizer import generate_visjs_html
 
-METODE_SKIPGRAM = "Skip-gram + Naive Bayes"
-METODE_TFIDF = "TF-IDF + Naive Bayes"
+# Konfigurasi Halaman Streamlit
+st.set_page_config(
+    page_title="Web Crawling & Analisis PageRank",
+    page_icon="🕸️",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
-MODEL_DEFAULT = {
-    METODE_SKIPGRAM: os.path.join(APP_DIR, "model_skipgram_nb.pkl"),
-    METODE_TFIDF: os.path.join(APP_DIR, "model_tfidf_nb.pkl"),
-}
-
-# Pastikan dijalankan lewat `streamlit run app.py`
-try:
-    from streamlit.runtime.scriptrunner import get_script_run_ctx
-    _berjalan_di_streamlit = get_script_run_ctx() is not None
-except Exception:
-    _berjalan_di_streamlit = True
-if not _berjalan_di_streamlit:
-    import sys
-    print("\nAplikasi ini harus dijalankan dengan perintah:\n"
-          f'    streamlit run "{os.path.abspath(__file__)}"\n')
-    sys.exit(0)
-
-st.set_page_config(page_title="Klasifikasi Berita", page_icon="📰", layout="centered")
-
-
-# ----------------------------------------------------------------------
-# 1. PREPROCESSING (HARUS SAMA PERSIS DENGAN YANG DIPAKAI SAAT LATIH MODEL)
-#    - Skip-gram : cleansing + case folding + tokenisasi
-#                  (TANPA stopword removal dan TANPA stemming)
-#    - TF-IDF    : cleansing + case folding + tokenisasi
-#                  + stopword removal + stemming
-# ----------------------------------------------------------------------
-@st.cache_resource(show_spinner="Menyiapkan stopword dan stemmer...")
-def siapkan_nlp():
-    """Hanya dipanggil pada jalur TF-IDF, jadi jalur Skip-gram tidak butuh NLTK/Sastrawi."""
-    import nltk
-    from nltk.corpus import stopwords
-    from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
-
-    nltk.download("stopwords", quiet=True)
-    stop = set(stopwords.words("indonesian")).union(set(stopwords.words("english")))
-    stop |= {
-        'dan','atau','yang','dengan','juga','karena','namun','sehingga','adalah','akan',
-        'saat','pada','untuk','dari','oleh','dalam','dapat','kami','mereka','kita','saya',
-        'ini','itu','tersebut','tsb','dll','dkk','spt','yg','dgn','dr','jr','sr','thn',
-        'tdk','gak','nggak','ya','ia','terkait','berdasarkan','setelah','sebelum',
-        'sambil','selain','sekitar','hingga','maupun','bisa','per','waktu','apakah','adanya'
+# Custom Styling CSS
+st.markdown("""
+<style>
+    .main-title {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: #1E3A8A;
+        margin-bottom: 0.2rem;
     }
-    stemmer = StemmerFactory().create_stemmer()
-
-    @lru_cache(maxsize=None)
-    def stem_cached(w):
-        return stemmer.stem(w)
-
-    return stop, stem_cached
-
-
-def bersihkan_teks(text, hapus_stopword=True, stemming=True):
-    if not isinstance(text, str):
-        return ""
-    text = re.sub(r"[^a-zA-Z\s]", " ", text).lower()      # cleansing + case folding
-    text = re.sub(r"\s+", " ", text).strip()
-    words = [w for w in text.split() if len(w) > 1]         # tokenisasi, buang token 1 huruf
-    if hapus_stopword:
-        stop, _ = siapkan_nlp()
-        words = [w for w in words if w not in stop]
-    if stemming:
-        _, stem = siapkan_nlp()
-        words = [stem(w) for w in words]
-    return " ".join(words)
-
-
-def praproses_tfidf(text):
-    return bersihkan_teks(text, hapus_stopword=True, stemming=True)
-
-
-def praproses_skipgram(text):
-    return bersihkan_teks(text, hapus_stopword=False, stemming=False)
-
-
-# ----------------------------------------------------------------------
-# 2. MEMUAT MODEL
-# ----------------------------------------------------------------------
-def _is_classifier(o):
-    return (hasattr(o, "predict_proba") and hasattr(o, "classes_")) or hasattr(o, "steps")
-
-
-def _is_vectorizer(o):
-    return hasattr(o, "transform") and hasattr(o, "vocabulary_")
-
-
-def _is_wordvectors(o):
-    if hasattr(o, "wv"):          # objek Word2Vec
-        return True
-    return hasattr(o, "vector_size") and hasattr(o, "__contains__") and hasattr(o, "__getitem__")
-
-
-def _daftar_kandidat(obj):
-    if isinstance(obj, dict):
-        return list(obj.values())
-    if isinstance(obj, (list, tuple)):
-        return list(obj)
-    return [obj]
-
-
-@st.cache_resource(show_spinner="Memuat model...")
-def muat_model(path, metode):
-    """Kembalikan dict komponen model.
-    Skip-gram -> {'clf', 'wv'}      TF-IDF -> {'clf', 'vectorizer'}"""
-    obj = joblib.load(path)
-    kandidat = _daftar_kandidat(obj)
-
-    if metode == METODE_TFIDF:
-        # Bisa berupa dict {'vectorizer', 'clf'} atau sklearn Pipeline(tfidf, nb)
-        if hasattr(obj, "steps") and len(obj.steps) >= 2 and _is_vectorizer(obj.steps[0][1]):
-            return {"vectorizer": obj.steps[0][1], "clf": obj.steps[-1][1]}
-        vec = next((o for o in kandidat if _is_vectorizer(o)), None)
-        clf = next((o for o in kandidat if _is_classifier(o)), None)
-        return {"vectorizer": vec, "clf": clf}
-
-    clf = next((o for o in kandidat if _is_classifier(o)), None)
-    wv = next((o for o in kandidat if _is_wordvectors(o)), None)
-    if wv is not None and hasattr(wv, "wv"):
-        wv = wv.wv
-
-    # Jika .pkl hanya berisi classifier, coba cari model Skip-gram terpisah
-    if wv is None:
-        folder = os.path.dirname(os.path.abspath(path))
-        for nama in ("model_skipgram.model", "skipgram.model", "word2vec.model",
-                     "model_skipgram.w2v", "model_skipgram.kv"):
-            p = os.path.join(folder, nama)
-            if os.path.exists(p):
-                from gensim.models import Word2Vec, KeyedVectors
-                try:
-                    wv = Word2Vec.load(p).wv
-                except Exception:
-                    wv = KeyedVectors.load(p)
-                break
-    return {"clf": clf, "wv": wv}
-
-
-def doc_vector(tokens, wv):
-    vecs = [wv[t] for t in tokens if t in wv]
-    if not vecs:
-        return np.zeros(wv.vector_size)
-    return np.mean(vecs, axis=0)
-
-
-# ----------------------------------------------------------------------
-# 3. AMBIL BERITA DARI LINK
-# ----------------------------------------------------------------------
-def ambil_berita(url):
-    """Kembalikan (judul, isi) dari URL. Raise ValueError jika gagal."""
-    html = trafilatura.fetch_url(url)
-    if not html:
-        raise ValueError("Halaman tidak dapat diunduh (cek link/koneksi internet).")
-    isi = trafilatura.extract(html)
-    if not isi:
-        raise ValueError("Isi berita tidak berhasil diekstrak dari halaman ini.")
-    meta = trafilatura.extract_metadata(html)
-    judul = (meta.title if meta and meta.title else "") or ""
-    return judul.strip(), isi.strip()
-
-
-# ----------------------------------------------------------------------
-# 4. KLASIFIKASI
-# ----------------------------------------------------------------------
-def _susun_hasil(clf, vec, teks_bersih, tokens, dikenal, keterangan):
-    proba = clf.predict_proba(vec)[0]
-    kelas = list(clf.classes_)
-    return {
-        "label": kelas[int(np.argmax(proba))],
-        "proba": dict(zip(kelas, proba)),
-        "n_token": len(tokens),
-        "n_dikenal": len(dikenal),
-        "teks_bersih": teks_bersih,
-        "keterangan": keterangan,
+    .sub-title {
+        font-size: 1.05rem;
+        color: #4B5563;
+        margin-bottom: 1.5rem;
     }
+    .metric-card {
+        background-color: #F8FAFC;
+        border-radius: 10px;
+        padding: 15px 20px;
+        border-left: 5px solid #3B82F6;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .author-badge {
+        display: inline-block;
+        background-color: #EFF6FF;
+        color: #1D4ED8;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border: 1px solid #BFDBFE;
+        margin-bottom: 15px;
+    }
+    .highlight-rank-1 {
+        background-color: #FEF3C7;
+        color: #B45309;
+        font-weight: bold;
+        padding: 4px 8px;
+        border-radius: 6px;
+    }
+</style>
+""", unsafe_allow_html=True)
 
+# Inisialisasi Session State agar data tidak hilang saat re-render
+if "crawl_data" not in st.session_state:
+    st.session_state["crawl_data"] = None
+if "analysis_results" not in st.session_state:
+    st.session_state["analysis_results"] = None
 
-def klasifikasi_skipgram(teks, clf, wv):
-    teks_bersih = praproses_skipgram(teks)            # tanpa stopword removal & stemming
-    tokens = teks_bersih.split()
-    dikenal = [t for t in tokens if t in wv]
-    if not dikenal:
-        return None
-    vec = doc_vector(tokens, wv).reshape(1, -1)       # rata-rata vektor kata Skip-gram
-    return _susun_hasil(clf, vec, teks_bersih, tokens, dikenal,
-                        "cleansing + case folding + tokenisasi (tanpa stopword removal dan stemming)")
+# Header Aplikasi
+st.markdown('<div class="main-title">🕸️ Web Crawling & Analisis Algoritma PageRank</div>', unsafe_allow_html=True)
+st.markdown('<div class="author-badge">👨‍💻 Angger Nur Kuncoro (NIM: 230411100155) • Teknik Informatika • Web Structure Mining</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-title">Sistem penambangan struktur web terintegrasi: Ekstraksi relasi hyperlink secara rekursif, pemodelan topologi graf, dan perankingan website terpenting menggunakan PageRank.</div>', unsafe_allow_html=True)
 
-
-def klasifikasi_tfidf(teks, clf, vectorizer):
-    teks_bersih = praproses_tfidf(teks)               # dengan stopword removal & stemming
-    tokens = teks_bersih.split()
-    kosakata = vectorizer.vocabulary_
-    dikenal = [t for t in tokens if t in kosakata]
-    if not dikenal:
-        return None
-    vec = vectorizer.transform([teks_bersih])         # vektor TF-IDF (sparse)
-    return _susun_hasil(clf, vec, teks_bersih, tokens, dikenal,
-                        "cleansing + case folding + tokenisasi + stopword removal + stemming")
-
-
-def klasifikasi(judul, isi, metode, komponen):
-    teks = f"{judul} {isi}"
-    if metode == METODE_TFIDF:
-        return klasifikasi_tfidf(teks, komponen["clf"], komponen["vectorizer"])
-    return klasifikasi_skipgram(teks, komponen["clf"], komponen["wv"])
-
-
-# ----------------------------------------------------------------------
-# 5. ANTARMUKA
-# ----------------------------------------------------------------------
-st.title("📰 Klasifikasi Berita Detik.com")
-
+# ================= SIDEBAR KONFIGURASI =================
 with st.sidebar:
-    st.header("Pengaturan")
-    metode = st.radio(
-        "Metode representasi teks",
-        [METODE_SKIPGRAM, METODE_TFIDF],
-        help="Skip-gram: vektor kata Word2Vec dirata-rata per berita. "
-             "TF-IDF: bobot kata pada kosakata hasil latihan.",
+    st.header("⚙️ Konfigurasi Crawling")
+    
+    # Preset Pilihan Cepat URL
+    preset = st.selectbox(
+        "Pilih Contoh Seed URL:",
+        [
+            "Custom URL",
+            "Universitas Trunojoyo Madura (https://www.trunojoyo.ac.id)",
+            "Wikipedia Web Mining (https://id.wikipedia.org/wiki/Penambangan_web)",
+            "Detik News (https://news.detik.com)",
+            "Kompas.com (https://www.kompas.com)"
+        ]
     )
-    model_path = st.text_input("Lokasi file model (.pkl)", MODEL_DEFAULT[metode], key=f"path_{metode}")
-    if metode == METODE_SKIPGRAM:
-        st.caption("Preprocessing: cleansing, case folding, tokenisasi. "
-                   "**Tanpa** stopword removal dan stemming.")
+    
+    default_url = "https://www.trunojoyo.ac.id"
+    if "Wikipedia" in preset:
+        default_url = "https://id.wikipedia.org/wiki/Penambangan_web"
+    elif "Detik" in preset:
+        default_url = "https://news.detik.com"
+    elif "Kompas" in preset:
+        default_url = "https://www.kompas.com"
+        
+    seed_url_input = st.text_input(
+        "Seed URL (Alamat Awal):",
+        value=default_url,
+        help="Alamat URL website yang menjadi titik awal penelusuran tautan."
+    )
+    
+    crawl_mode = st.radio(
+        "Cakupan Crawling (Scope):",
+        options=["same_domain", "all"],
+        format_func=lambda x: "Halaman Internal (Same Domain)" if x == "same_domain" else "Semua Tautan (Internal & Eksternal)",
+        help="'Same Domain' membatasi perayapan hanya pada website/subdomain yang sama. 'Semua Tautan' mencakup tautan keluar ke situs lain."
+    )
+    
+    col_d1, col_d2 = st.columns(2)
+    with col_d1:
+        max_depth = st.slider("Max Depth:", min_value=1, max_value=3, value=2, help="Kedalaman level penelusuran tautan rekursif.")
+    with col_d2:
+        max_pages = st.slider("Max Pages:", min_value=10, max_value=60, value=30, step=5, help="Jumlah maksimal halaman yang dikunjungi.")
+        
+    st.markdown("---")
+    st.header("🧮 Parameter PageRank")
+    
+    damping_factor = st.slider(
+        "Damping Factor (d):",
+        min_value=0.50,
+        max_value=0.99,
+        value=0.85,
+        step=0.01,
+        help="Probabilitas seorang peselancar web acak terus mengikuti link (standar Google PageRank = 0.85)."
+    )
+    
+    col_p1, col_p2 = st.columns(2)
+    with col_p1:
+        max_iterations = st.number_input("Max Iterasi:", min_value=20, max_value=300, value=100, step=10)
+    with col_p2:
+        tolerance = st.selectbox("Toleransi (ε):", [1e-4, 1e-5, 1e-6, 1e-7], index=2)
+        
+    request_delay = st.slider("Request Delay (detik):", min_value=0.0, max_value=1.0, value=0.2, step=0.1, help="Jeda antar request untuk politeness.")
+    
+    start_button = st.button("🚀 Mulai Crawling & Hitung PageRank", use_container_width=True, type="primary")
+
+# ================= EKSEKUSI CRAWLING =================
+if start_button:
+    normalized_seed = normalize_url(seed_url_input)
+    if not is_valid_http_url(normalized_seed):
+        st.error("❌ Mohon masukkan format URL HTTP/HTTPS yang valid!")
     else:
-        st.caption("Preprocessing: cleansing, case folding, tokenisasi, "
-                   "stopword removal, dan stemming (Sastrawi).")
-    st.markdown(
-        "Model dilatih hanya dari berita **detik.com** kategori **sport** dan "
-        "**finance**. Berita dari topik lain tetap akan dipaksa masuk ke salah satu "
-        "dari dua kelas tersebut."
-    )
+        st.info(f"🔍 Memulai proses crawling pada **{normalized_seed}** (Mode: {crawl_mode}, Max Depth: {max_depth}, Max Pages: {max_pages})...")
+        
+        progress_bar = st.progress(0.0)
+        status_text = st.empty()
+        
+        crawler = WebCrawler(
+            seed_url=normalized_seed,
+            mode=crawl_mode,
+            max_depth=max_depth,
+            max_pages=max_pages,
+            delay=request_delay,
+            timeout=7
+        )
+        
+        def update_progress(current_url, depth, total_visited, queue_size):
+            frac = min(total_visited / max(max_pages, 1), 1.0)
+            progress_bar.progress(frac)
+            status_text.markdown(f"**Mengunjungi:** `{current_url[:65]}...` (Depth: {depth} | Dikunjungi: {total_visited} | Antrean: {queue_size})")
+            
+        with st.spinner("Sedang melakukan Web Crawling & Ekstraksi Hyperlink..."):
+            crawl_data = crawler.crawl(progress_callback=update_progress)
+            
+        progress_bar.progress(1.0)
+        status_text.success(f"✅ Selesai! Berhasil mengekstrak {crawl_data['total_nodes']} halaman web dan {crawl_data['total_edges']} relasi hyperlink.")
+        
+        with st.spinner("Menghitung Algoritma PageRank & Validasi Matriks..."):
+            analysis = analyze_and_compare(
+                nodes_info=crawl_data["nodes"],
+                edges=crawl_data["edges"],
+                d=damping_factor,
+                max_iter=int(max_iterations),
+                tol=float(tolerance)
+            )
+            
+        st.session_state["crawl_data"] = crawl_data
+        st.session_state["analysis_results"] = analysis
+        st.rerun()
 
-st.caption(f"Metode aktif: {metode} · Kelas: SPORT / FINANCE")
+# ================= TAMPILAN DASHBOARD =================
+if st.session_state["analysis_results"] is not None:
+    crawl_data = st.session_state["crawl_data"]
+    analysis = st.session_state["analysis_results"]
+    df = analysis["dataframe"]
+    
+    # Ringkasan Metrik
+    total_nodes = len(crawl_data["nodes"])
+    total_edges = len(crawl_data["edges"])
+    
+    # Kepadatan Graf: E / (V * (V - 1))
+    density = (total_edges / (total_nodes * (total_nodes - 1))) if total_nodes > 1 else 0.0
+    
+    top_site = df.iloc[0] if not df.empty else None
+    
+    st.markdown("### 📊 Ringkasan Hasil Analisis Topologi Web")
+    c1, c2, c3, c4 = st.columns(4)
+    with c1:
+        st.metric(label="Total Website / Node (V)", value=f"{total_nodes:,}")
+    with c2:
+        st.metric(label="Total Hyperlink / Edge (E)", value=f"{total_edges:,}")
+    with c3:
+        st.metric(label="Kepadatan Graf (Density)", value=f"{density:.4f}")
+    with c4:
+        if top_site is not None:
+            st.metric(
+                label="Website Paling Berpengaruh (#1)",
+                value=f"{top_site['pagerank_custom']:.5f}",
+                delta=f"Rank #1: {top_site['domain']}"
+            )
+            
+    st.markdown("---")
+    
+    # Tab Navigasi Hasil
+    tab_graph, tab_table, tab_theory, tab_logs, tab_export = st.tabs([
+        "🕸️ Visualisasi Graf Interaktif",
+        "🏆 Tabel Peringkat PageRank",
+        "🔬 Validasi Matematis & Konvergensi",
+        "📜 Log Crawling Data",
+        "💾 Ekspor Data & Hasil"
+    ])
+    
+    # TAB 1: VISUALISASI GRAF
+    with tab_graph:
+        st.subheader("Visualisasi Struktur Jaringan Hyperlink (Web Structure Graph)")
+        st.markdown(
+            "Graf di bawah ini menunjukkan keterhubungan antarhalaman. "
+            "**Ukuran node merepresentasikan nilai PageRank** (semakin besar nilainya, semakin besar lingkaran). "
+            "Node berwarna **Merah/Oranye** adalah 3 website dengan pengaruh tertinggi. Panah menunjukkan arah hyperlink."
+        )
+        
+        col_g1, col_g2 = st.columns([3, 1])
+        with col_g2:
+            physics_on = st.checkbox("Aktifkan Animasi Fisika (Physics Simulation)", value=True)
+            min_pr_filter = st.slider(
+                "Filter Min PageRank:",
+                min_value=float(df["pagerank_custom"].min()),
+                max_value=float(df["pagerank_custom"].max()),
+                value=float(df["pagerank_custom"].min()),
+                step=0.001,
+                format="%.4f"
+            )
+            
+        # Saring node sesuai filter PageRank
+        filtered_nodes = {
+            url: info for url, info in crawl_data["nodes"].items()
+            if analysis["custom_pr"].get(url, 0.0) >= min_pr_filter
+        }
+        filtered_edges = [
+            e for e in crawl_data["edges"]
+            if e[0] in filtered_nodes and e[1] in filtered_nodes
+        ]
+        
+        graph_html = generate_visjs_html(
+            nodes_info=filtered_nodes,
+            edges=filtered_edges,
+            pagerank_scores=analysis["custom_pr"],
+            in_degrees=analysis["in_degrees"],
+            out_degrees=analysis["out_degrees"],
+            height="620px",
+            physics_enabled=physics_on
+        )
+        
+        components.html(graph_html, height=640, scrolling=False)
+        st.caption("💡 Tips: Klik dan seret node untuk memindahkan posisi. Scroll mouse untuk memperbesar/memperkecil (Zoom).")
 
-komponen = None
+    # TAB 2: TABEL PERINGKAT
+    with tab_table:
+        st.subheader("Tabel Peringkat Tingkat Kepentingan Website (PageRank Leaderboard)")
+        
+        col_s1, col_s2 = st.columns([2, 1])
+        with col_s1:
+            search_query = st.text_input("🔍 Cari berdasarkan URL atau Judul Halaman:", "")
+        with col_s2:
+            sort_by = st.selectbox("Urutkan Berdasarkan:", ["pagerank_custom", "in_degree", "out_degree", "diff_abs"])
+            
+        display_df = df.copy()
+        if search_query:
+            display_df = display_df[
+                display_df["url"].str.contains(search_query, case=False, na=False) |
+                display_df["title"].str.contains(search_query, case=False, na=False)
+            ]
+        display_df = display_df.sort_values(by=sort_by, ascending=False).reset_index(drop=True)
+        
+        # Format tampilan tabel
+        styled_df = display_df[[
+            "rank", "url", "title", "domain", "pagerank_custom", "in_degree", "out_degree"
+        ]].rename(columns={
+            "rank": "Rank",
+            "url": "Alamat URL",
+            "title": "Judul Halaman (Page Title)",
+            "domain": "Domain",
+            "pagerank_custom": "Skor PageRank",
+            "in_degree": "Backlinks (In-Degree)",
+            "out_degree": "Tautan Keluar (Out-Degree)"
+        })
+        
+        st.dataframe(
+            styled_df.style.format({
+                "Skor PageRank": "{:.6f}",
+                "Backlinks (In-Degree)": "{:d}",
+                "Tautan Keluar (Out-Degree)": "{:d}"
+            }).background_gradient(subset=["Skor PageRank"], cmap="YlOrRd"),
+            use_container_width=True,
+            height=400
+        )
+        
+        # Grafik Bar Top 10
+        st.markdown("#### 10 Website Paling Berpengaruh Berdasarkan PageRank")
+        top_10 = df.head(10).copy()
+        chart_data = top_10.set_index("title")[["pagerank_custom"]]
+        st.bar_chart(chart_data)
 
-# Jika diisi nama file saja, cari relatif ke folder app.py
-if not os.path.isabs(model_path) and not os.path.exists(model_path):
-    model_path = os.path.join(APP_DIR, model_path)
+    # TAB 3: VALIDASI MATEMATIS
+    with tab_theory:
+        st.subheader("🔬 Landasan Matematis & Validasi Algoritma PageRank")
+        
+        st.markdown(r"""
+        #### 1. Rumus Matematis PageRank (Random Surfer Model)
+        Algoritma PageRank memodelkan perilaku pengguna internet yang mengklik tautan secara acak. Formula umum yang digunakan adalah:
+        
+        $$PR(u) = \frac{1 - d}{N} + d \sum_{v \in B_u} \frac{PR(v)}{L(v)}$$
+        
+        **Keterangan Notasi:**
+        - $PR(u)$: Nilai PageRank dari halaman $u$.
+        - $d$: *Damping factor* (biasanya diatur sebesar **0.85**), yaitu probabilitas pengguna terus mengklik tautan.
+        - $1 - d$: Probabilitas teleportasi acak (*random jump*) ke halaman sembarang di seluruh web.
+        - $N$: Jumlah total halaman (node) dalam graf.
+        - $B_u$: Himpunan semua halaman $v$ yang memiliki hyperlink mengarah ke halaman $u$ (*backlinks / in-links*).
+        - $L(v)$: Jumlah tautan keluar (*out-degree*) dari halaman $v$.
+        
+        #### 2. Penanganan Dead-Ends (Dangling Nodes)
+        Jika sebuah halaman tidak memiliki tautan keluar sama sekali ($L(v) = 0$), maka halaman tersebut akan menyerap seluruh probabilitas (*rank sink*). 
+        Pada sistem ini, bobot dari *dangling nodes* didistribusikan kembali secara merata ke seluruh $N$ halaman:
+        $$\sum_{v \in \text{dangling}} \frac{PR(v)}{N}$$
+        """)
+        
+        st.markdown("---")
+        st.markdown("#### 3. Bukti Konvergensi Metode Power Iteration")
+        col_c1, col_c2 = st.columns([2, 1])
+        with col_c1:
+            st.write(rf"Sistem mencapai titik konvergen setelah **{analysis['iterations_taken']} iterasi** (toleransi $\epsilon = {tolerance}$).")
+            conv_df = pd.DataFrame({
+                "Iterasi ke-": range(1, len(analysis["convergence_history"]) + 1),
+                "Perubahan L1-Norm (Delta)": analysis["convergence_history"]
+            }).set_index("Iterasi ke-")
+            st.line_chart(conv_df)
+        with col_c2:
+            st.metric(label="Total Iterasi", value=analysis["iterations_taken"])
+            st.metric(label="Delta Akhir", value=f"{analysis['convergence_history'][-1]:.8f}")
+            if HAS_NETWORKX:
+                st.metric(
+                    label="MAE vs NetworkX",
+                    value=f"{analysis['mae_comparison']:.8f}",
+                    help="Mean Absolute Error antara implementasi Custom Power Iteration dan fungsi bawaan NetworkX."
+                )
+                st.success("✅ Implementasi Custom dan NetworkX identik secara matematis (MAE < 1e-5).")
+            else:
+                st.info("Pustaka NetworkX opsional.")
 
-if not os.path.exists(model_path):
-    st.error(f"File model tidak ditemukan: `{model_path}`. Letakkan di folder yang sama dengan app.py "
-             f"(`{APP_DIR}`) atau isi lokasi lengkapnya di sidebar.")
-    st.stop()
+    # TAB 4: LOG CRAWLING
+    with tab_logs:
+        st.subheader("📜 Riwayat Penelusuran (Crawling Logs)")
+        st.markdown(f"Total baris riwayat aktivitas crawler: **{len(crawl_data['logs'])} entri**.")
+        log_text = "\n".join(crawl_data["logs"])
+        st.text_area("Aktivitas HTTP & Parser:", value=log_text, height=350)
 
-try:
-    komponen = muat_model(model_path, metode)
-except Exception as e:
-    st.error(f"Gagal memuat model: {e}")
-    st.info("Pastikan versi scikit-learn dan gensim sama dengan yang dipakai saat model disimpan.")
-    st.stop()
+    # TAB 5: EKSPOR DATA
+    with tab_export:
+        st.subheader("💾 Unduh Data & Hasil Eksperimen")
+        st.markdown("Anda dapat mengunduh hasil crawling dan perankingan untuk keperluan dokumentasi laporan praktikum/UAS:")
+        
+        col_e1, col_e2, col_e3 = st.columns(3)
+        with col_e1:
+            csv_data = df.to_csv(index=False).encode('utf-8')
+            st.download_button(
+                label="📥 Unduh Ranking CSV",
+                data=csv_data,
+                file_name="pagerank_ranking_results.csv",
+                mime="text/csv",
+                use_container_width=True
+            )
+        with col_e2:
+            edges_df = pd.DataFrame(crawl_data["edges"], columns=["source", "target", "anchor_text"])
+            edges_csv = edges_df.to_csv(index=False).encode('utf-8')
+            st.download_button(
+                label="📥 Unduh Edge List CSV (Gephi)",
+                data=edges_csv,
+                file_name="hyperlink_edges.csv",
+                mime="text/csv",
+                use_container_width=True
+            )
+        with col_e3:
+            json_export = {
+                "metadata": {
+                    "seed_url": seed_url_input,
+                    "total_nodes": total_nodes,
+                    "total_edges": total_edges,
+                    "damping_factor": damping_factor,
+                    "iterations": analysis["iterations_taken"]
+                },
+                "nodes": [
+                    {"id": u, "pr": analysis["custom_pr"].get(u, 0.0), "in_deg": analysis["in_degrees"].get(u, 0)}
+                    for u in crawl_data["nodes"]
+                ],
+                "edges": [{"from": src, "to": dst} for src, dst, *_ in crawl_data["edges"]]
+            }
+            json_data = json.dumps(json_export, indent=2).encode('utf-8')
+            st.download_button(
+                label="📥 Unduh Graf JSON",
+                data=json_data,
+                file_name="web_graph_pagerank.json",
+                mime="application/json",
+                use_container_width=True
+            )
 
-if komponen.get("clf") is None:
-    st.error("Classifier Naive Bayes tidak ditemukan di dalam file .pkl.")
-    st.stop()
-if metode == METODE_SKIPGRAM and komponen.get("wv") is None:
-    st.error(
-        "Model Skip-gram tidak ditemukan. File .pkl harus memuat vektor kata Skip-gram "
-        "(Word2Vec/KeyedVectors) bersama classifier-nya: "
-        "`joblib.dump({'wv': model_sg.wv, 'clf': gnb_final}, 'model_skipgram_nb.pkl')`."
-    )
-    st.stop()
-if metode == METODE_TFIDF and komponen.get("vectorizer") is None:
-    st.error(
-        "TfidfVectorizer tidak ditemukan di file .pkl. File ini harus memuat vectorizer "
-        "bersama classifier-nya: "
-        "`joblib.dump({'vectorizer': tfidf_final, 'clf': mnb_final}, 'model_tfidf_nb.pkl')`."
-    )
-    st.stop()
+else:
+    # Tampilan Awal Sebelum Crawling Dijalankan
+    st.info("👈 Silakan pilih atau masukkan **Seed URL** pada panel sebelah kiri, atur batasan kedalaman (*depth*), lalu klik **Mulai Crawling & Hitung PageRank**.")
+    
+    col_info1, col_info2 = st.columns(2)
+    with col_info1:
+        st.markdown("""
+        #### 📌 Apa yang Dilakukan oleh Aplikasi Ini?
+        1. **Crawling Rekursif:** Sistem mengunjungi halaman awal, mengurai dokumen HTML menggunakan `BeautifulSoup`, dan mengekstrak semua tautan `<a href="...">`.
+        2. **Normalisasi URL:** Menghapus fragment anchor (`#`), tracking query parameter, dan menyelesaikan URL relatif ke absolut.
+        3. **Pemodelan Graf Terarah:** Merepresentasikan setiap halaman unik sebagai *Node* dan setiap hyperlink sebagai *Directed Edge* ($A \rightarrow B$).
+        4. **Kalkulasi PageRank:** Menghitung probabilitas kedatangan peselancar acak menggunakan metode *Power Iteration* mandiri serta perbandingan dengan pustaka `NetworkX`.
+        5. **Visualisasi Interaktif:** Menampilkan graf jaringan dinamis yang dapat di-zoom, digeser, dan node-nya membesar sesuai nilai pengaruh PageRank.
+        """)
+    with col_info2:
+        st.markdown("""
+        #### 🚀 Panduan Deployment di Server Warga Lab:
+        Aplikasi ini dibangun menggunakan **Streamlit**, sehingga dapat langsung dijalankan pada server laboratorium dengan port publik:
+        ```bash
+        # 1. Masuk ke direktori proyek
+        cd uas-pagerank-crawler
 
-tab_link, tab_teks = st.tabs(["🔗 Dari link", "✍️ Tempel teks manual"])
+        # 2. Install dependensi
+        pip install -r requirements.txt
 
-judul, isi = "", ""
-berita_baru = False
-
-with tab_link:
-    url = st.text_input("Link berita", placeholder="https://finance.detik.com/...")
-    if st.button("Klasifikasikan", type="primary", key="btn_link"):
-        st.session_state.pop("berita", None)
-        if not url.strip():
-            st.warning("Masukkan link berita terlebih dahulu.")
-        elif not urlparse(url).scheme.startswith("http"):
-            st.warning("Link harus diawali http:// atau https://")
-        else:
-            if "detik.com" not in urlparse(url).netloc:
-                st.info("Link ini bukan dari detik.com🗿. Hasil bisa kurang akurat karena model dilatih dari detik.com.")
-            try:
-                with st.spinner("Mengunduh dan mengekstrak berita..."):
-                    judul, isi = ambil_berita(url.strip())
-                berita_baru = True
-            except ValueError as e:
-                st.error(str(e))
-                st.caption("Jika terus gagal, gunakan tab 'Tempel teks manual'.")
-
-with tab_teks:
-    judul_manual = st.text_input("Judul (opsional)")
-    isi_manual = st.text_area("Isi berita", height=200)
-    if st.button("Klasifikasikan", type="primary", key="btn_teks"):
-        st.session_state.pop("berita", None)
-        if len(isi_manual.strip()) < 30:
-            st.warning("Isi berita terlalu pendek.")
-        else:
-            judul, isi, berita_baru = judul_manual, isi_manual, True
-
-# Berita disimpan di session_state agar saat metode diganti di sidebar,
-# berita yang sama langsung diklasifikasikan ulang tanpa mengunduh lagi.
-if berita_baru:
-    st.session_state["berita"] = (judul, isi)
-
-if "berita" in st.session_state:
-    judul, isi = st.session_state["berita"]
-    with st.spinner("Memproses teks dan mengklasifikasikan..."):
-        hasil = klasifikasi(judul, isi, metode, komponen)
-
-    st.divider()
-    if hasil is None:
-        st.error("Tidak ada kata dari berita ini yang dikenal model, sehingga tidak bisa diklasifikasikan.")
-    else:
-        ikon = {"SPORT": "⚽", "FINANCE": "💹"}.get(hasil["label"], "📰")
-        st.subheader(f"{ikon} Prediksi: {hasil['label']}")
-        st.caption(f"Metode: {metode}")
-
-        for kelas, p in sorted(hasil["proba"].items(), key=lambda x: -x[1]):
-            st.write(f"**{kelas}** — {p:.1%}")
-            st.progress(float(p))
-
-        rasio = hasil["n_dikenal"] / max(hasil["n_token"], 1)
-        c1, c2, c3 = st.columns(3)
-        c1.metric("Token (setelah preprocessing)", hasil["n_token"])
-        c2.metric("Token dikenal model", hasil["n_dikenal"])
-        c3.metric("Rasio dikenal", f"{rasio:.0%}")
-
-        if rasio < 0.5:
-            st.warning("Kurang dari separuh kata dikenal model. Berita mungkin di luar topik latih; hasil kurang dapat diandalkan.")
-        st.caption("Catatan: peluang Naive Bayes cenderung terlalu yakin (mendekati 0%/100%), jadi anggap sebagai indikasi kasar.")
-
-        if judul:
-            st.markdown(f"**Judul terdeteksi:** {judul}")
-        with st.expander("Pratinjau isi berita"):
-            st.write(isi[:1500] + ("..." if len(isi) > 1500 else ""))
-        with st.expander("Teks setelah preprocessing"):
-            st.caption(f"Langkah: {hasil['keterangan']}")
-            st.write(hasil["teks_bersih"])
+        # 3. Jalankan aplikasi pada server lab
+        streamlit run app.py --server.port 8501 --server.address 0.0.0.0
+        ```
+        Setelah itu, aplikasi dapat diakses oleh dosen dan rekan mahasiswa melalui IP server lab: `http://<IP-SERVER-LAB>:8501`.
+        """)
