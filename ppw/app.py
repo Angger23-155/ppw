@@ -297,15 +297,40 @@ if st.session_state["analysis_results"] is not None:
             "out_degree": "Tautan Keluar (Out-Degree)"
         })
         
-        st.dataframe(
-            styled_df.style.format({
-                "Skor PageRank": "{:.6f}",
-                "Backlinks (In-Degree)": "{:d}",
-                "Tautan Keluar (Out-Degree)": "{:d}"
-            }).background_gradient(subset=["Skor PageRank"], cmap="YlOrRd"),
-            use_container_width=True,
-            height=400
-        )
+        # Render tabel dengan Column Config bawaan Streamlit (aman dari dependensi eksternal)
+        try:
+            max_pr_val = float(df["pagerank_custom"].max()) if not df.empty and df["pagerank_custom"].max() > 0 else 1.0
+            st.dataframe(
+                styled_df,
+                column_config={
+                    "Rank": st.column_config.NumberColumn("Rank", format="%d", width="small"),
+                    "Alamat URL": st.column_config.LinkColumn("Alamat URL", width="medium"),
+                    "Judul Halaman (Page Title)": st.column_config.TextColumn("Judul Halaman", width="large"),
+                    "Domain": st.column_config.TextColumn("Domain", width="small"),
+                    "Skor PageRank": st.column_config.ProgressColumn(
+                        "Skor PageRank",
+                        help="Tingkat pengaruh/otoritas halaman (PageRank)",
+                        format="%.6f",
+                        min_value=0.0,
+                        max_value=max_pr_val
+                    ),
+                    "Backlinks (In-Degree)": st.column_config.NumberColumn("Backlinks (In)", format="%d"),
+                    "Tautan Keluar (Out-Degree)": st.column_config.NumberColumn("Out-Degree", format="%d")
+                },
+                use_container_width=True,
+                height=420,
+                hide_index=True
+            )
+        except Exception:
+            st.dataframe(
+                styled_df.style.format({
+                    "Skor PageRank": "{:.6f}",
+                    "Backlinks (In-Degree)": "{:d}",
+                    "Tautan Keluar (Out-Degree)": "{:d}"
+                }),
+                use_container_width=True,
+                height=400
+            )
         
         # Grafik Bar Top 10
         st.markdown("#### 10 Website Paling Berpengaruh Berdasarkan PageRank")

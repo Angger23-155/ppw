@@ -11,3 +11,4 @@ requests
 networkx
 pyvis
 pandas
+matplotlib
