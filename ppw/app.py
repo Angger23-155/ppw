@@ -67,13 +67,13 @@ if "analysis_results" not in st.session_state:
     st.session_state["analysis_results"] = None
 
 # Header Aplikasi
-st.markdown('<div class="main-title">🕸️ Web Crawling & Analisis Algoritma PageRank</div>', unsafe_allow_html=True)
-st.markdown('<div class="author-badge">👨‍💻 Angger Maulana Effendi (NIM: 230411100155) • Teknik Informatika • Web Structure Mining</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-title">Web Crawling & Analisis Algoritma PageRank</div>', unsafe_allow_html=True)
+st.markdown('<div class="author-badge">Angger Maulana Effendi (NIM: 230411100155) • Teknik Informatika • Web Structure Mining</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-title">Sistem penambangan struktur web terintegrasi: Ekstraksi relasi hyperlink secara rekursif, pemodelan topologi graf, dan perankingan website terpenting menggunakan PageRank.</div>', unsafe_allow_html=True)
 
 # ================= SIDEBAR KONFIGURASI =================
 with st.sidebar:
-    st.header("⚙️ Konfigurasi Crawling")
+    st.header("Konfigurasi Crawling")
     
     # Preset Pilihan Cepat URL
     preset = st.selectbox(
@@ -115,7 +115,7 @@ with st.sidebar:
         max_pages = st.slider("Max Pages:", min_value=10, max_value=60, value=30, step=5, help="Jumlah maksimal halaman yang dikunjungi.")
         
     st.markdown("---")
-    st.header("🧮 Parameter PageRank")
+    st.header("Parameter PageRank")
     
     damping_factor = st.slider(
         "Damping Factor (d):",
@@ -134,15 +134,15 @@ with st.sidebar:
         
     request_delay = st.slider("Request Delay (detik):", min_value=0.0, max_value=1.0, value=0.2, step=0.1, help="Jeda antar request untuk politeness.")
     
-    start_button = st.button("🚀 Mulai Crawling & Hitung PageRank", use_container_width=True, type="primary")
+    start_button = st.button("Mulai Crawling & Hitung PageRank", use_container_width=True, type="primary")
 
 # ================= EKSEKUSI CRAWLING =================
 if start_button:
     normalized_seed = normalize_url(seed_url_input)
     if not is_valid_http_url(normalized_seed):
-        st.error("❌ Mohon masukkan format URL HTTP/HTTPS yang valid!")
+        st.error("Mohon masukkan format URL HTTP/HTTPS yang valid!")
     else:
-        st.info(f"🔍 Memulai proses crawling pada **{normalized_seed}** (Mode: {crawl_mode}, Max Depth: {max_depth}, Max Pages: {max_pages})...")
+        st.info(f"Memulai proses crawling pada **{normalized_seed}** (Mode: {crawl_mode}, Max Depth: {max_depth}, Max Pages: {max_pages})...")
         
         progress_bar = st.progress(0.0)
         status_text = st.empty()
@@ -165,7 +165,7 @@ if start_button:
             crawl_data = crawler.crawl(progress_callback=update_progress)
             
         progress_bar.progress(1.0)
-        status_text.success(f"✅ Selesai! Berhasil mengekstrak {crawl_data['total_nodes']} halaman web dan {crawl_data['total_edges']} relasi hyperlink.")
+        status_text.success(f"Selesai! Berhasil mengekstrak {crawl_data['total_nodes']} halaman web dan {crawl_data['total_edges']} relasi hyperlink.")
         
         with st.spinner("Menghitung Algoritma PageRank & Validasi Matriks..."):
             analysis = analyze_and_compare(
@@ -195,7 +195,7 @@ if st.session_state["analysis_results"] is not None:
     
     top_site = df.iloc[0] if not df.empty else None
     
-    st.markdown("### 📊 Ringkasan Hasil Analisis Topologi Web")
+    st.markdown("### Ringkasan Hasil Analisis Topologi Web")
     c1, c2, c3, c4 = st.columns(4)
     with c1:
         st.metric(label="Total Website / Node (V)", value=f"{total_nodes:,}")
@@ -215,11 +215,11 @@ if st.session_state["analysis_results"] is not None:
     
     # Tab Navigasi Hasil
     tab_graph, tab_table, tab_theory, tab_logs, tab_export = st.tabs([
-        "🕸️ Visualisasi Graf Interaktif",
-        "🏆 Tabel Peringkat PageRank",
-        "🔬 Validasi Matematis & Konvergensi",
-        "📜 Log Crawling Data",
-        "💾 Ekspor Data & Hasil"
+        "Visualisasi Graf Interaktif",
+        "Tabel Peringkat PageRank",
+        "Validasi Matematis & Konvergensi",
+        "Log Crawling Data",
+        "Ekspor Data & Hasil"
     ])
     
     # TAB 1: VISUALISASI GRAF
@@ -264,7 +264,7 @@ if st.session_state["analysis_results"] is not None:
         )
         
         components.html(graph_html, height=640, scrolling=False)
-        st.caption("💡 Tips: Klik dan seret node untuk memindahkan posisi. Scroll mouse untuk memperbesar/memperkecil (Zoom).")
+        st.caption("Tips: Klik dan seret node untuk memindahkan posisi. Scroll mouse untuk memperbesar/memperkecil (Zoom).")
 
     # TAB 2: TABEL PERINGKAT
     with tab_table:
@@ -272,7 +272,7 @@ if st.session_state["analysis_results"] is not None:
         
         col_s1, col_s2 = st.columns([2, 1])
         with col_s1:
-            search_query = st.text_input("🔍 Cari berdasarkan URL atau Judul Halaman:", "")
+            search_query = st.text_input("Cari berdasarkan URL atau Judul Halaman:", "")
         with col_s2:
             sort_by = st.selectbox("Urutkan Berdasarkan:", ["pagerank_custom", "in_degree", "out_degree", "diff_abs"])
             
@@ -315,7 +315,7 @@ if st.session_state["analysis_results"] is not None:
 
     # TAB 3: VALIDASI MATEMATIS
     with tab_theory:
-        st.subheader("🔬 Landasan Matematis & Validasi Algoritma PageRank")
+        st.subheader("Landasan Matematis & Validasi Algoritma PageRank")
         
         st.markdown(r"""
         #### 1. Rumus Matematis PageRank (Random Surfer Model)
@@ -356,27 +356,27 @@ if st.session_state["analysis_results"] is not None:
                     value=f"{analysis['mae_comparison']:.8f}",
                     help="Mean Absolute Error antara implementasi Custom Power Iteration dan fungsi bawaan NetworkX."
                 )
-                st.success("✅ Implementasi Custom dan NetworkX identik secara matematis (MAE < 1e-5).")
+                st.success("Implementasi Custom dan NetworkX identik secara matematis (MAE < 1e-5).")
             else:
                 st.info("Pustaka NetworkX opsional.")
 
     # TAB 4: LOG CRAWLING
     with tab_logs:
-        st.subheader("📜 Riwayat Penelusuran (Crawling Logs)")
+        st.subheader("Riwayat Penelusuran (Crawling Logs)")
         st.markdown(f"Total baris riwayat aktivitas crawler: **{len(crawl_data['logs'])} entri**.")
         log_text = "\n".join(crawl_data["logs"])
         st.text_area("Aktivitas HTTP & Parser:", value=log_text, height=350)
 
     # TAB 5: EKSPOR DATA
     with tab_export:
-        st.subheader("💾 Unduh Data & Hasil Eksperimen")
+        st.subheader("Unduh Data & Hasil Eksperimen")
         st.markdown("Anda dapat mengunduh hasil crawling dan perankingan untuk keperluan dokumentasi laporan praktikum/UAS:")
         
         col_e1, col_e2, col_e3 = st.columns(3)
         with col_e1:
             csv_data = df.to_csv(index=False).encode('utf-8')
             st.download_button(
-                label="📥 Unduh Ranking CSV",
+                label="Unduh Ranking CSV",
                 data=csv_data,
                 file_name="pagerank_ranking_results.csv",
                 mime="text/csv",
@@ -386,7 +386,7 @@ if st.session_state["analysis_results"] is not None:
             edges_df = pd.DataFrame(crawl_data["edges"], columns=["source", "target", "anchor_text"])
             edges_csv = edges_df.to_csv(index=False).encode('utf-8')
             st.download_button(
-                label="📥 Unduh Edge List CSV (Gephi)",
+                label="Unduh Edge List CSV (Gephi)",
                 data=edges_csv,
                 file_name="hyperlink_edges.csv",
                 mime="text/csv",
@@ -409,7 +409,7 @@ if st.session_state["analysis_results"] is not None:
             }
             json_data = json.dumps(json_export, indent=2).encode('utf-8')
             st.download_button(
-                label="📥 Unduh Graf JSON",
+                label="Unduh Graf JSON",
                 data=json_data,
                 file_name="web_graph_pagerank.json",
                 mime="application/json",
@@ -420,12 +420,12 @@ else:
     # Tampilan Awal Sebelum Crawling Dijalankan
     col_banner1, col_banner2 = st.columns([3, 1])
     with col_banner1:
-        st.info("👈 Masukkan **Link Website (Seed URL)** pada panel sebelah kiri, atur batasan kedalaman (*depth*), lalu klik **Mulai Crawling & Hitung PageRank**.")
+        st.info("Masukkan **Link Website (Seed URL)** pada panel sebelah kiri, atur batasan kedalaman (*depth*), lalu klik **Mulai Crawling & Hitung PageRank**.")
     with col_banner2:
         csv_nodes_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "nodes_pagerank.csv")
         csv_edges_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "edges_pagerank.csv")
         if os.path.exists(csv_nodes_path) and os.path.exists(csv_edges_path):
-            if st.button("📂 Muat Data Crawl Tersimpan", use_container_width=True, help="Muat data crawling website yang sudah dieksekusi sebelumnya"):
+            if st.button("Muat Data Crawl Tersimpan", use_container_width=True, help="Muat data crawling website yang sudah dieksekusi sebelumnya"):
                 df_n = pd.read_csv(csv_nodes_path)
                 df_e = pd.read_csv(csv_edges_path)
                 nodes_dict = {
@@ -463,7 +463,7 @@ else:
     col_info1, col_info2 = st.columns(2)
     with col_info1:
         st.markdown("""
-        #### 📌 Apa yang Dilakukan oleh Aplikasi Ini?
+        #### Apa yang Dilakukan oleh Aplikasi Ini?
         1. **Crawling Rekursif:** Sistem mengunjungi halaman awal, mengurai dokumen HTML menggunakan `BeautifulSoup`, dan mengekstrak semua tautan `<a href="...">`.
         2. **Normalisasi URL:** Menghapus fragment anchor (`#`), tracking query parameter, dan menyelesaikan URL relatif ke absolut.
         3. **Pemodelan Graf Terarah:** Merepresentasikan setiap halaman unik sebagai *Node* dan setiap hyperlink sebagai *Directed Edge* ($A \rightarrow B$).
@@ -472,7 +472,7 @@ else:
         """)
     with col_info2:
         st.markdown("""
-        #### 🚀 Panduan Deployment di Server Warga Lab:
+        #### Panduan Deployment di Server Warga Lab:
         Aplikasi ini dibangun menggunakan **Streamlit**, sehingga dapat langsung dijalankan pada server laboratorium dengan port publik:
         ```bash
         # 1. Masuk ke direktori proyek
