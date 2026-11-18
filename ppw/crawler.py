@@ -25,7 +25,13 @@ def normalize_url(url: str) -> str:
     - Hilangkan trailing slash berlebih (kecuali root path)
     """
     try:
-        url, _ = urldefrag(url.strip())
+        url = url.strip()
+        if not url:
+            return ""
+        if not url.startswith(('http://', 'https://')):
+            url = 'https://' + url
+            
+        url, _ = urldefrag(url)
         parsed = urlparse(url)
         
         scheme = parsed.scheme.lower()

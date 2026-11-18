@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import time
 import json
+import os
 import streamlit.components.v1 as components
 
 from crawler import WebCrawler, normalize_url, is_valid_http_url
@@ -417,7 +418,47 @@ if st.session_state["analysis_results"] is not None:
 
 else:
     # Tampilan Awal Sebelum Crawling Dijalankan
-    st.info("👈 Silakan pilih atau masukkan **Seed URL** pada panel sebelah kiri, atur batasan kedalaman (*depth*), lalu klik **Mulai Crawling & Hitung PageRank**.")
+    col_banner1, col_banner2 = st.columns([3, 1])
+    with col_banner1:
+        st.info("👈 Masukkan **Link Website (Seed URL)** pada panel sebelah kiri, atur batasan kedalaman (*depth*), lalu klik **Mulai Crawling & Hitung PageRank**.")
+    with col_banner2:
+        csv_nodes_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "nodes_pagerank.csv")
+        csv_edges_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "edges_pagerank.csv")
+        if os.path.exists(csv_nodes_path) and os.path.exists(csv_edges_path):
+            if st.button("📂 Muat Data Crawl Tersimpan", use_container_width=True, help="Muat data crawling website yang sudah dieksekusi sebelumnya"):
+                df_n = pd.read_csv(csv_nodes_path)
+                df_e = pd.read_csv(csv_edges_path)
+                nodes_dict = {
+                    str(row["url"]): {
+                        "title": str(row.get("title", row["url"])),
+                        "domain": str(row.get("domain", "")),
+                        "depth": int(row.get("depth", 0)),
+                        "status": 200
+                    }
+                    for _, row in df_n.iterrows()
+                }
+                edges_list = [
+                    (str(row["source"]), str(row["target"]), str(row.get("anchor_text", "Link")))
+                    for _, row in df_e.iterrows()
+                ]
+                crawl_data = {
+                    "nodes": nodes_dict,
+                    "edges": edges_list,
+                    "total_nodes": len(nodes_dict),
+                    "total_edges": len(edges_list),
+                    "logs": ["[INFO] Data berhasil dimuat dari berkas lokal nodes_pagerank.csv dan edges_pagerank.csv."]
+                }
+                with st.spinner("Menghitung Algoritma PageRank..."):
+                    analysis = analyze_and_compare(
+                        nodes_info=crawl_data["nodes"],
+                        edges=crawl_data["edges"],
+                        d=damping_factor,
+                        max_iter=int(max_iterations),
+                        tol=float(tolerance)
+                    )
+                st.session_state["crawl_data"] = crawl_data
+                st.session_state["analysis_results"] = analysis
+                st.rerun()
     
     col_info1, col_info2 = st.columns(2)
     with col_info1:
