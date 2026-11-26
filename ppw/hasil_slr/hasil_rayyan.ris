@@ -1,0 +1,390 @@
+TY  - JOUR
+TI  - Patch similarity convolutional neural network for urban flood extent mapping using bi-temporal satellite multispectral imagery
+AU  - Peng B.
+PY  - 2019
+T2  - Remote Sensing
+AB  - Urban flooding is a major natural disaster that poses a serious threat to the urban environment. It is highly demanded that the flood extent can be mapped in near real-time for disaster rescue and relief missions, reconstruction efforts, and financial loss evaluation. Many efforts have been taken to identify the flooding zones with remote sensing data and image processing techniques. Unfortunately, the near real-time production of accurate flood maps over impacted urban areas has not been well investigated due to three major issues. (1) Satellite imagery with high spatial resolution over urban areas usually has nonhomogeneous background due to different types of objects such as buildings, moving vehicles, and road networks. As such, classical machine learning approaches hardly can model the spatial relationship between sample pixels in the flooding area. (2) Handcrafted features associated with the data are usually required as input for conventional flood mapping models, which may not be able to fully utilize the underlying patterns of a large number of available data. (3) High-resolution optical imagery often has varied pixel digital numbers (DNs) for the same ground objects as a result of highly inconsistent illumination conditions during a flood. Accordingly, traditional methods of flood mapping have major limitations in generalization based on testing data. To address the aforementioned issues in urban flood mapping, we developed a patch similarity convolutional neural network (PSNet) using satellite multispectral surface reflectance imagery before and after flooding with a spatial resolution of 3 meters. We used spectral reflectance instead of raw pixel DNs so that the influence of inconsistent illumination caused by varied weather conditions at the time of data collection can be greatly reduced. Such consistent spectral reflectance data also enhance the generalization capability of the proposed model. Experiments on the high resolution imagery before and after the urban flooding events (i.e., the 2017 Hurricane Harvey and the 2018 Hurricane Florence) showed that the developed PSNet can produce urban flood maps with consistently high precision, recall, F1 score, and overall accuracy compared with baseline classification models including support vector machine, decision tree, random forest, and AdaBoost, which were often poor in either precision or recall. The study paves the way to fuse bi-temporal remote sensing images for near real-time precision damage mapping associated with other types of natural hazards (e.g., wildfires and earthquakes).
+DO  - 10.3390/rs11212492
+SN  - 20724292
+DB  - Scopus
+AN  - 2-s2.0-85074659859
+ER  - 
+
+TY  - JOUR
+TI  - A CNN-Transformer Hybrid Approach for Crop Classification Using Multitemporal Multisensor Images
+AU  - Li Z.
+PY  - 2020
+T2  - IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing
+AB  - Multitemporal Earth observation capability plays an increasingly important role in crop monitoring. As the frequency of satellite acquisition of remote sensing images becomes higher, how to fully exploit the implicit phenological laws in dense multitemporal data is of increasing importance. In this article, we propose a CNN-transformer approach to perform the crop classification, in the model, we borrow the transformer architecture from the knowledge of NLP to dig into the pattern of multitemporal sequence. First, after unifying the spatial-spectral scale of each multiband data acquired from different sensors, we obtain the scale-consistent feature and position feature of multitemporal sequence. Second, with adopting multilayer encoder modules derived from the transformer, we mine deep correlation patterns of multitemporal sequence. Finally, the feed-forward layer and softmax layer serve as output layers of the model to predict crop categories. The proposed CNN-transformer approach is illustrated in a crop-rich agricultural region in central California, where 65 multitemporal profiles from multisensor Sentinel-2 A/B and Landsat-8 are obtained in 2018. Through multiband multiresolution fusion, sequence correlation extraction of multitemporal data and category feature extraction, the classification results show that the proposed method has a significant performance improvement compared with other traditional methods.
+DO  - 10.1109/jstars.2020.2971763
+SN  - 19391404
+DB  - Scopus
+AN  - 2-s2.0-85082401661
+ER  - 
+
+TY  - JOUR
+TI  - Using time series vector features for annual cultivated land mapping: A trial in northern Henan, China
+AU  - Lu X.
+PY  - 2022
+T2  - Plos One
+AB  - Annual monitoring of the spatial distribution of cultivated land is important for maintaining the ecological environment, achieving a status quo of land resource management, and guaranteeing agricultural production. With the gradual development of remote sensing technology, it has become a common practice to obtain cultivated land boundary information on a large scale with the help of satellite Earth observation images. Traditional land use classification methods are affected by multiple types of land cover, which leads to a decrease in the accuracy of cultivated land mapping. In contrast, although the current advanced methods (such as deep learning) can obtain more accurate cultivated land mapping results than traditional methods, such methods often require the use of a massive amount of training samples, large computing power, and highly complex model tuning processes, increasing the cost of mapping and requiring the involvement of more professionals. This has hindered the promotion of related methods in mapping institutions. This paper proposes a method based on time series vector features (MTVF), which uses vector thinking to establish the features. The advantage of this method is that the introduction of vector features enlarges the differences between the different land cover types, which overcomes the loss of mapping accuracy caused by the influences of the spectra of different ground objects and ensures the calculation efficiency. Moreover, the MTVF uses a traditional method (random forest) as the classification core, which makes the MTVF less demanding than advanced methods in terms of the number of training samples. Sentinel-2 satellite images were used to carry out cultivated land mapping for 2020 in northern Henan Province, China. The results show that the MTVF has the potential to accurately identify cultivated land. Furthermore, the overall accuracy, producer accuracy, and user accuracy of the overall study area and four sub-study areas were all greater than 90%. In addition, the cultivated land mapping accuracy of the MTVF is significantly better than that of the maximum likelihood, support vector machine, and artificial neural network methods.
+DO  - 10.1371/journal.pone.0272300
+SN  - 19326203
+DB  - Scopus
+AN  - 2-s2.0-85135768375
+ER  - 
+
+TY  - JOUR
+TI  - Comparisons between temporal statistical metrics, time series stacks and phenological features derived from NASA Harmonized Landsat Sentinel-2 data for crop type mapping
+AU  - Liu X.
+PY  - 2023
+T2  - Computers and Electronics in Agriculture
+DO  - 10.1016/j.compag.2023.108015
+SN  - 01681699
+DB  - Scopus
+AN  - 2-s2.0-85163856051
+ER  - 
+
+TY  - JOUR
+TI  - Semantic segmentation model for land cover classification from satellite images in Gambella National Park, Ethiopia
+AU  - Lilay M.Y.
+PY  - 2023
+T2  - SN Applied Sciences
+AB  - This work uses machine learning approaches to present semantic segmentation for land cover classification in Gambella National Park (GNP). Land cover classification has become more accurate due to developments in remote sensing data. Land cover classification from satellite images has been studied, but the methodologies and satellite data employed so far are not suitable for research regions with the possibility to find heterogeneous land cover classes within small areas. Previous studies found issues with the satellite images coarser spatial resolution, the use of standard statistical methods as classifiers, and the difficulty in optimal patch size selection when patch-based classification is used. To address these issues, we suggested a deep learning-based semantic segmentation model that could be utilized as a pixel-level land cover classification technique. The suggested technique employed high-resolution Sentinel-2 satellite images of our study area (GNP) as a dataset and constructed and assessed pixel-level classification models. As a deep learning-based classification model, we have used the Link-Net architecture and its encoder part was modified further to incorporate the state-of-the-art architecture called ResNet34. The developed models, support vector machine with CNN features (CNN–SVM), random forest with CNN features (CNN-RF), LinkNet model with ResNet-34 as encoder (LinkNet-ResNet34), attain average F1-Score values of 81%,82%, and 87.4% respectively.
+DO  - 10.1007/s42452-023-05280-4
+SN  - 25233971
+DB  - Scopus
+AN  - 2-s2.0-85148301743
+ER  - 
+
+TY  - JOUR
+TI  - Extracting Tea Plantations from Multitemporal Sentinel-2 Images Based on Deep Learning Networks
+AU  - Yao Z.
+PY  - 2023
+T2  - Agriculture Switzerland
+AB  - Tea is a special economic crop that is widely distributed in tropical and subtropical areas. Timely and accurate access to the distribution of tea plantation areas is crucial for effective tea plantation supervision and sustainable agricultural development. Traditional methods for tea plantation extraction are highly dependent on feature engineering, which requires expensive human and material resources, and it is sometimes even difficult to achieve the expected results in terms of accuracy and robustness. To alleviate such problems, we took Xinchang County as the study area and proposed a method to extract tea plantations based on deep learning networks. Convolutional neural network (CNN) and recurrent neural network (RNN) modules were combined to build an R-CNN model that can automatically obtain both spatial and temporal information from multitemporal Sentinel-2 remote sensing images of tea plantations, and then the spatial distribution of tea plantations was predicted. To confirm the effectiveness of our method, support vector machine (SVM), random forest (RF), CNN, and RNN methods were used for comparative experiments. The results show that the R-CNN method has great potential in the tea plantation extraction task, with an F1 score and IoU of 0.885 and 0.793 on the test dataset, respectively. The overall classification accuracy and kappa coefficient for the whole region are 0.953 and 0.904, respectively, indicating that this method possesses higher extraction accuracy than the other four methods. In addition, we found that the distribution index of tea plantations in mountainous areas with gentle slopes is the highest in Xinchang County. This study can provide a reference basis for the fine mapping of tea plantation distributions.
+DO  - 10.3390/agriculture13010010
+SN  - 20770472
+DB  - Scopus
+AN  - 2-s2.0-85146667162
+ER  - 
+
+TY  - JOUR
+TI  - Land cover classification using Land Parcel Identification System (LPIS) data and open source Eo-Learn library
+AU  - Şimşek F.F.
+PY  - 2023
+T2  - Geocarto International
+AB  - Depending on the development of remote sensing technologies, data at various spatial, temporal and spectral resolutions are obtained and play a key role in Earth investigation. Land cover/use maps are also created using these data. These data play an important role as a base for determining land cover and land use classes, detecting changes, monitoring forest, agriculture and wetlands, as well as updating the LPIS data used by countries. As well as being reference data in the LPIS update, current land cover and land use classification results with satellite images also provide statistical information about which class has changed over the years and how much the class or classes need to be updated, and will also provide the planning of the update to be made on a national scale. In this study, land cover classification for 2020 covering Çivril-Baklan Plain, which is between the borders of Denizli Province (Turkey), Baklan, Çal and Çivril Districts, was performed. The LPIS classes of the study area drawn in 2015 and the land cover classes as a result of the 2020 classification were compared as a result of the classification process, and particularly the areas with change were referenced in the LPIS update. In the classification process, the open source Eo-Learn library, which uses machine learning and deep learning algorithms in remote sensing studies and Sentinel-2 images that can be accessed directly in this library were used. The open source Eo-Learn library has been preferred because it provides great convenience to users in the classification process with ready-made machine learning models and easy access to satellite images, image processing steps (cloud masking, calculate index, feature extraction, temporal interpolation) are carried out in a certain workflow. Instead of land cover classification from a single image, 17 different time (multi-temporal) images between 01.02.2020 and 31.11.2020 were used. In the classification process, 12 different features were used for the image taken on each date, including NDVI, NDWI, NDBI indices and Tasseled Cap transformations, as well as (Blue) B02, (Green) B03, (Red) B04, (NIR) B08, (SWIR-1) B11, (SWIR-2) B12 bands. In the classification process, the Light Gradient Boosting Machines (LightGBM) algorithm in the Eo-Learn library and the physical blocks produced within the scope of the Land Parcel Identification System (LPIS) project were used as ground truth data; arable land, bare land, forest, artificial surface, shrubland, tree crops and water classes were created. The classification results were evaluated using the K fold (k = 5) cross validation method, with F1 score, recall, and precision values calculated for each class, and the overall accuracy %92.2. When the classification result is compared with the LPIS data, it is seen that the arable land, shrub land, and water classes have changed. This study determined that these classes, in particular, need to be updated.
+DO  - 10.1080/10106049.2022.2146760
+SN  - 10106049
+DB  - Scopus
+AN  - 2-s2.0-85143078899
+ER  - 
+
+TY  - JOUR
+TI  - Monitoring the Distribution of Mangrove Area using Synthetic Aperture Radar (SAR) and Optic Remote Sensing Data Fusion based on Deep Learning in Kotabaru Regency, Indonesia
+AU  - Sudiana D.
+PY  - 2024
+T2  - Evergreen
+SN  - 21890420
+DB  - Scopus
+AN  - 2-s2.0-85189155021
+ER  - 
+
+TY  - CONF
+TI  - Intelligent Water Body Delineation for Flood Monitoring Using Remote Sensing Data and Deep Learning Algorithms
+AU  - Mathana S.K.
+PY  - 2024
+T2  - 2024 4th International Conference on Artificial Intelligence and Signal Processing Aisp 2024
+AB  - Floods pose significant threats to lives, infrastructure, and the environment. Flood monitoring is crucial for effective disaster management and mitigation. Traditional methods of flood monitoring have several limitations including manual data collection, limited coverage, and delayed response times. In recent years, advanced remote sensing technology, coupled with the power of deep learning algorithms have greatly enhanced flood monitoring capabilities. This paper presents a comprehensive investigation into the integration of remote sensing data and deep learning algorithms for water body delineation in flood monitoring. A dataset containing 700 Sentinel-2 satellite images was used. It was divided into training, testing, and validation data, with corresponding ground truth masks. Deep learning models, including UNET, SEGNET, DeepLabv3, and RefineNet, were employed for water body delineation tasks. After thorough assessment, RefineN et emerged as the best performing model. It has exceptional accuracy and precision in outlining water bodies. Transfer learning techniques were explored to further improve the RefineN et model performance. Various backbone architectures, including ResNet50, ResNet101, MobileNetV2, and EfficientN etBO, were investigated for their compatibility with RefineN et. Experimental results revealed that EfficientN etBO served as the optimal backbone architecture, significantly enhancing the model's performance. The RefineNet model with EfficientN etBO backbone achieved remarkable results, with an accuracy of 0.9478, F1-score of 0.9162, IOU of 0.8455, and MAP of 0.8708. These findings underscore the potential of integrating remote sensing data and deep learning algorithms for flood monitoring applications. The findings from this research carry substantial importance for disaster management and emergency response efforts using neural networks.
+DO  - 10.1109/aisp61711.2024.10870599
+DB  - Scopus
+AN  - 2-s2.0-85219139172
+ER  - 
+
+TY  - JOUR
+TI  - A Novel Coral Reef Classification Method Combining Radiative Transfer Model With Deep Learning
+AU  - Ai B.
+PY  - 2024
+T2  - IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing
+AB  - Coral reef ecosystem is gradually being threatened, thus monitoring coral reefs using remote sensing is of great significance. There are difficulties in identifying and classifying coral reefs. We propose a radiative transfer model with deep learning (RTDL) to improve the accuracy of the coral reef classification. This model combines the radiative transfer theory with deep learning methods to consider the nonlinear fitting ability of the model and the constraints of the physical model, which improves the classification accuracy. This model utilizes ICESat-2 data to obtain the underwater topography photons (UTP) by active contours with variable convolution kernel model and retrieves water depth by combining the UTP with the Sentinel-2 images. An exponential model is used for reinforcing the reflectivity of the seabed features, which is executed by deep learning models. This study uses multidimensional and multitemporal images to illustrate the generalization and robustness of the RTDL model compared with other methods. The result indicates that the RTDL model obtains remarkable achievements in the classification of coral reef landforms. The method increases the accuracy by 5%, mean intersection over union by 13%, especially for areas, such as reef front slopes and lagoons, where the identification accuracy is increased by 26% for the reef front slopes, by 15% for sandbars, and by 9% for lagoons, compared with the traditional method across 14 areas. The model provides a stable classification framework with physically meaningful for identifying coral reef areas, providing robust method support for the conservation of their ecosystems.
+DO  - 10.1109/jstars.2024.3430899
+SN  - 19391404
+DB  - Scopus
+AN  - 2-s2.0-85199047334
+ER  - 
+
+TY  - JOUR
+TI  - From Pixels to Patterns: A Review of Land Cover Analysis Techniques
+AU  - Surana P.
+PY  - 2024
+T2  - International Journal of Intelligent Systems and Applications in Engineering
+SN  - 21476799
+DB  - Scopus
+AN  - 2-s2.0-85181512820
+ER  - 
+
+TY  - JOUR
+TI  - A method for robust estimation of snow seasonality metrics from Landsat and Sentinel-2 time series data over Atlas Mountains scale using Google Earth Engine
+AU  - El jabiri Y.
+PY  - 2024
+T2  - Geocarto International
+AB  - Seasonal snow cover provides the majority of freshwater supplies for human society and natural ecosystems especially in semi-arid regions. For water resource managers, precise data regarding the spatiotemporal variability of snow cover and snow phenology is of paramount importance. Owing to the great spatial and temporal heterogeneity of the snowpack and the inaccessibility of high mountainous areas, gapless satellite remote sensing presents an unprecedented opportunity to monitor snow cover effectively and affordably on a fine scale, from different aspects, and with regular revisit time. This study derives the snow seasonality metrics (first day of snowfall, last day of snow melt; and snow cover duration) over a large semi-arid region in Morocco’s Atlas Mountains. We calculate these metrics by combining over 10,000 images from Landsat 8 and Sentinel 2 satellites for four hydrological years (2016–2021) to create a harmonized product with a time interval of about 3 days using the Google Earth Engine (GEE) platform. This dense and large time series facilitates a gap-filling method to minimize and overcome the effect of cloud cover, and its assessment shows a positive correlation between the masked pixels and the interpolated ones. These methods allowed us to realize a map of the snow cover area and extract a homogeneous Normalized Difference Snow Index (NDSI) profile over the four years whereby we were able to determine the optimal threshold to separate the presence of snow from its absence. The results showed that derived snow cover metrics provide considerable variation in both time and space, where an increase in snowpack measurement values at higher elevations can be noted. Overall, the snow duration ranges between November and April depending on the characteristics of each hydrological year. The retrieved Landsat 8 and Sentinel 2 snow dates had a high level of agreement with in-situ data observations with almost a day-and-a-half delay with an overall accuracy equal to 0.96. The analysis of snow cover dynamics via GEE has offered the ability to calculate the first day of snowfall, last day of snowmelt, and snow cover duration annually at a pixel level, providing the user with the ability to track the seasonal and interannual variability in the timing of snowmelt toward a better understanding of how the hydrological cycles of higher latitude and mountainous regions are responding to climate change.
+DO  - 10.1080/10106049.2024.2313001
+SN  - 10106049
+DB  - Scopus
+AN  - 2-s2.0-85185959834
+ER  - 
+
+TY  - JOUR
+TI  - Land use and land cover change detection from multisource satellite imagery – A hybrid convolutional neural network approach
+AU  - Babitha M.S.
+PY  - 2025
+T2  - Engineering Applications of Artificial Intelligence
+DO  - 10.1016/j.engappai.2025.112187
+SN  - 09521976
+DB  - Scopus
+AN  - 2-s2.0-105015142212
+ER  - 
+
+TY  - JOUR
+TI  - Severity classification of pepper verticillium wilt from UAV multispectral imagery using a fuzzy deep neural network
+AU  - Lu L.
+PY  - 2025
+T2  - Smart Agricultural Technology
+AB  - To address the problem of low classification accuracy and limited detection efficiency of pepper verticillium wilt (VW) caused by fuzzy, uncertain information, this study integrates fuzzy logic into a deep learning framework for verticillium wilt severity (VWS) classification based on unmanned aerial vehicle (UAV) multispectral imagery. Leveraging UAV remote sensing, a multimodal feature set comprising 20 vegetation indices, together with UAV-derived spectral bands, was constructed. principal component analysis (PCA) was applied to reduce dimensionality, resulting in two datasets: a full feature set (FF, 24 features) and a selected feature set (SF, 10 features). Three machine learning models-including Random Forest (RF), Support Vector Regression (SVR), and eXtreme Gradient Boosting (XGBoost)-were optimized via grid search. In addition, two deep learning models were developed, namely the one-dimensional convolutional neural network (1DCNN) and the fuzzy-enhanced 1DCNN (fuzzy 1DCNN). The experimental results showed that SVR performed satisfactorily among the machine learning models ( F 1 s c o r e = 0.858, O A = 0.874), but the deep learning models outperformed the traditional methods overall. The fuzzy 1DCNN yielded the highest classification accuracy and robustness ( F 1 s c o r e = 0.915, O A = 0.926). Notably, it maintained superior performance even on the FF dataset, demonstrating strong resistance to noise, as well as irrelevant features. The integration of fuzzy membership functions enabled adaptive weighting of input variables, thereby enhancing fault tolerance and improving feature discrimination. Overall, the proposed fuzzy deep neural network shows strong potential for managing uncertainty in remote sensing data and offers a robust framework for the real-time monitoring and precise field management of pepper crops affected by VW.
+DO  - 10.1016/j.atech.2025.101423
+SN  - 27723755
+DB  - Scopus
+AN  - 2-s2.0-105015643449
+ER  - 
+
+TY  - JOUR
+TI  - Unified estimation of rice canopy leaf area index over multiple periods based on UAV multispectral imagery and deep learning
+AU  - Li H.
+PY  - 2025
+T2  - Plant Methods
+AB  - BACKGROUND: Rice is one of the major food crops in the world, and the monitoring of its growth condition is of great significance for guaranteeing food security and promoting sustainable agricultural development. Leaf area index (LAI) is a key indicator for assessing the growth condition and yield potential of rice, and the traditional methods for obtaining LAI have problems such as low efficiency and large error. With the development of remote sensing technology, unmanned aerial multispectral remote sensing combined with deep learning technology provides a new way for efficient and accurate estimation of LAI in rice. RESULTS: In this study, a multispectral camera mounted on a UAV was utilized to acquire rice canopy image data, and rice LAI was uniformly estimated over multiple periods by the multilayer perceptron (MLP) and convolutional neural network (CNN) models in deep learning. The results showed that the CNN model based on five-band reflectance images (490, 550, 670, 720, and 850 nm) as input after feature screening exhibited high estimation accuracy at different growth stages. Compared with the traditional MLP model with multiple vegetation indices as inputs, the CNN model could better process the original multispectral image data, effectively avoiding the problem of vegetation index saturation, and improving the accuracies by 4.89, 5.76, 10.96, 1.84 and 6.01% in the rice tillering, jointing, booting, and heading periods, respectively, and the overall accuracy was improved by 6.01%. Moreover, the model accuracies (MLP and CNN) before and after variable screening showed noticeable changes. Conducting variable screening contributed to a substantial improvement in the accuracy of rice LAI estimation. CONCLUSIONS: UAV multispectral remote sensing combined with CNN technology provides an efficient and accurate method for the unified multi-period estimation of rice LAI. Moreover, the generalization ability and adaptability of the model were further improved by rational variable screening and data enhancement techniques. This study can provide a technical support for precision agriculture and a more accurate solution for rice growth monitoring. More feature extraction and variable screening methods can be further explored in future studies by optimizing the model structure to improve the accuracy and stability of the model.
+DO  - 10.1186/s13007-025-01398-1
+SN  - 17464811
+DB  - Scopus
+AN  - 2-s2.0-105006842772
+ER  - 
+
+TY  - JOUR
+TI  - Enhanced agricultural land use/land cover classification in the Nile Delta using Sentinel-1 and Sentinel-2 data and machine learning
+AU  - Maze M.
+PY  - 2025
+T2  - ISPRS Journal of Photogrammetry and Remote Sensing
+DO  - 10.1016/j.isprsjprs.2025.08.019
+SN  - 09242716
+DB  - Scopus
+AN  - 2-s2.0-105014599111
+ER  - 
+
+TY  - CONF
+TI  - Soil Texture Classification Based on Deep Learning Networks and Multi-Source Remote Sensing Images
+AU  - Li X.
+PY  - 2025
+T2  - 2025 6th International Conference on Geology Mapping and Remote Sensing Icgmrs 2025
+AB  - To address the inefficiency and limited applicability of traditional soil texture analysis methods, this study proposes a soil texture classification approach integrating multi-source remote sensing images with deep learning networks. Using Landsat- 8 and Sentinel-2 remote sensing data, we constructed 256 $\times 256$ sample sets and conducted comparative experiments on five classical neural networks: SegFormer, U-Net, PSPNet, DeepLabV3+, and SegNet. The results demonstrate that SegFormer achieves optimal overall performance on Sentinel-2 data ($\mathrm{mIoU}=0.6942$), with its Transformer architecture effectively capturing global contextual features of soil textures. This validates the significant impact of multi-scale feature processing capabilities on model performance. For Sentinel-2 data, SegNet exhibits the highest classification accuracy for gravelly soil and hard soil (IoU are 0.7796 and 0.7899, respectively), but underperforms for ordinary soil (IoU is less than $\mathbf{0. 4 3}$). The study confirms that fusing deep learning models with multi-source remote sensing data can overcome the geographical limitations of traditional methods, with SegFormer showing cross-data-source stability (mIoU >0.69 for both datasets). SegFormer emerges as a novel solution for large-scale soil texture monitoring, though boundary ambiguity in hard and ordinary soil classification requires further optimization. This research provides an efficient technical pathway for digital soil mapping and precision agricultural management.
+DO  - 10.1109/icgmrs66001.2025.11065565
+DB  - Scopus
+AN  - 2-s2.0-105011677036
+ER  - 
+
+TY  - CONF
+TI  - Robust Small Methane Plume Segmentation in Satellite Imagery
+AU  - Tran K.D.M.
+PY  - 2025
+T2  - International Conference on Control Automation and Information Sciences Iccais
+AB  - This paper tackles the challenging problem of detecting methane plumes, a potent greenhouse gas, using Sentinel-2 imagery. This contributes to the mitigation of rapid climate change. We propose a novel deep learning solution based on U-Net with a ResNet34 encoder, integrating dual spectral enhancement techniques (Varon ratio and Sanchez regression) to optimise input features for heightened sensitivity. A key achievement is the ability to detect small plumes down to$400 ~\mathrm{m}^{2}$(i.e., for a single pixel at 20 m resolution), surpassing traditional methods limited to larger plumes. Experiments show our approach achieves a 78.39 % F1-score on the validation set, demonstrating superior performance in sensitivity and precision over existing remote sensing techniques for automated methane monitoring, especially for small plumes.
+DO  - 10.1109/iccais67508.2025.11262127
+SN  - 24757896
+DB  - Scopus
+AN  - 2-s2.0-105032653309
+ER  - 
+
+TY  - CONF
+TI  - Adaptive Preprocessing Mechanism of Satellite Imagery for Vegetation Land Cover Identification
+AU  - Srivastava S.
+PY  - 2025
+T2  - Proceedings of the 9th International Conference on Electronics Communication and Aerospace Technology Iceca 2025
+AB  - The increasing availability of high-resolution satellite imagery, such as Sentinel-2, provides great potential for land cover classification. However, raw imagery often suffers from issues like cloud cover, haze, and low contrast, reducing classification accuracy. Traditional preprocessing pipelines apply the same techniques to all images, leading to over- or under-processing. This project presents an adaptive preprocessing framework using a shallow multi-label convolutional neural network (CNN) to predict necessary preprocessing operations (e.g., cloud masking, normalization, and contrast enhancement) on a per-patch basis. These steps are applied through a modular pipeline, ensuring tailored enhancements. The cleaned patches are then fed into a U-Net++ segmentation model trained on Dynamic World land cover labels for classes such as trees, grass, crops, water, built-up areas, and bare land. Results demonstrate that adaptive preprocessing improves classification performance, particularly in challenging conditions.
+DO  - 10.1109/iceca66444.2025.11383158
+DB  - Scopus
+AN  - 2-s2.0-105034869410
+ER  - 
+
+TY  - JOUR
+TI  - Assessing the effectiveness of deep embeddings for tree species classification in the Dutch Forest Inventory
+AU  - Ishikawa T.
+PY  - 2026
+T2  - Science of Remote Sensing
+DO  - 10.1016/j.srs.2026.100498
+SN  - 26660172
+DB  - Scopus
+AN  - 2-s2.0-105050605460
+ER  - 
+
+TY  - JOUR
+TI  - STCAFormer: Spatio-temporal cross attention based transformer for fusion of remote sensing images
+AU  - Li J.
+PY  - 2026
+T2  - Remote Sensing of Environment
+AB  - Spatio-temporal fusion is an important technique used to address the trade-off between temporal and spatial resolution in remote sensing satellite images. However, existing deep learning-based methods often rely on a single fusion approach, which limits their ability to effectively balance the preservation of spatial details in fine images with the integration of temporal information from coarse images. In this paper, we proposed a hybrid model architecture STCAFormer which combines temporal and spatial fusion attention mechanism, leveraging their complementary strengths to maximize the utilization of temporal and spatial information from coarse and fine images. Specifically, we design a dual-input encoder structure that processes two input images simultaneously. Moreover, inspired by the unified workflow of traditional methods that implement spatio-temporal fusion in pixel space, STCAFormer introduces a fusion stage designed for spatio-temporal fusions in feature space, enabling the effective integration of spatial and temporal features from dual-input encoder. Three novel blocks are designed in this research: a swin-temporal fusion block utilizing cross-attention mechanism to capture and fuse temporal variation features, a multi-scale spatial fusion block that integrates weighted summation for temporal variation and fine spatial features at both local and global scales, and a dual-path up-sampling block designed to achieve high-fidelity image restoration. STCAFormer was compared with six different types of spatio-temporal fusion methods on remote sensing image pairs, including Landsat 8/MODIS and Sentinel-2/3 pairs, from various regions. Experimental results demonstrate that STCAFormer performs better than baseline methods when the regions and satellite sensors remain unchanged. The transfer ability of STCAFormer was also proved to be more competitive than baseline methods. The ablation studies show that the proposed blocks are effective for performance improvement of spatio-temporal fusion The proposed STCAFormer demonstrates robust generalization across Landsat 8/MODIS and Sentinel-2/3, as well as across land-cover types represented in the test datasets. The code of the proposed STCAFormer is available at: https://github.com/Neooolee/STCAFormer .
+DO  - 10.1016/j.rse.2026.115594
+SN  - 00344257
+DB  - Scopus
+AN  - 2-s2.0-105045961029
+ER  - 
+
+TY  - JOUR
+TI  - Instance segmentation of different spatial resolution satellite images with Mask R-CNN integration
+AU  - Lacinoglu B.S.
+PY  - 2026
+T2  - Acta Geodaetica Et Geophysica
+DO  - 10.1007/s40328-026-00498-1
+SN  - 22135812
+DB  - Scopus
+AN  - 2-s2.0-105036589205
+ER  - 
+
+TY  - JOUR
+TI  - Water Body Extraction in the Middle Reaches of the Heilongjiang River Based on Interpretable Machine Learning
+AU  - Min Z.
+PY  - 2026
+T2  - Water Switzerland
+AB  - To address the challenges of strong spectral mixing, pronounced feature redundancy, and limited generalization capability of traditional methods in complex heterogeneous river water body extraction, this study uses Sentinel-2 Level-2A multispectral imagery obtained from the Copernicus Data Space Ecosystem to investigate water body extraction in the middle reaches of the Heilongjiang River and proposes an optimized Extreme Gradient Boosting (XGBoost) model based on generalized features and balanced sampling, implemented using XGBoost version 2.1.4. The proposed method is compared with the Normalized Difference Water Index (NDWI)-based threshold segmentation method, U-Net deep learning segmentation model and the Random Forest (RF) classifier. The results show that the proposed XGBoost model achieves the best classification performance, with a Precision of 0.9821 and an F1-score of 0.9695 for water body extraction, significantly outperforming the benchmark methods and demonstrating stronger robustness and adaptability. Both ablation experiments and Shapley Additive exPlanations (SHAP)-based interpretability analysis consistently identified the Sentinel-2 red-edge band (B5) as the most influential feature. Its removal resulted in a substantial decline in classification performance, while B5 exhibited the highest SHAP importance. The water-vapour band (B9) and the Automated Water Extraction Index with Shadow (AWEIsh) were the next most influential features, while water indices, band-ratio features, and atmospheric-related bands mainly played auxiliary roles. This study provides an effective technical framework for high-precision water body extraction and river dynamic monitoring in complex fluvial environments.
+DO  - 10.3390/w18172126
+SN  - 20734441
+DB  - Scopus
+AN  - 2-s2.0-105050241692
+ER  - 
+
+TY  - JOUR
+TI  - CL-LGFM: Early-Season Winter Wheat Mapping by Integrating Sentinel-2 NDVI and GPM Precipitation Data—A Case Study in the Chaohu Basin, China
+AU  - Su N.
+PY  - 2026
+T2  - Remote Sensing
+AB  - Early-season winter wheat mapping is crucial for agricultural management and food security, but reliable identification remains challenging under weak spectral conditions during early growth stages. To address this challenge, this study developed a CNN–LSTM with a lag-aware gated fusion model (CL-LGFM) for winter wheat mapping in the Chaohu Basin, China, using a reconstructed 5-day Sentinel-2 NDVI time series and precipitation data from the Global Precipitation Measurement (GPM) mission. The model employs a dual-branch architecture to jointly learn vegetation and precipitation features and introduces a lag-aware dynamic gated fusion module to capture the delayed response of vegetation to precipitation and enhance multi-source feature fusion. The results show that the proposed method achieved reliable early-season winter wheat mapping (OA ≥ 0.90, Kappa ≥ 0.80) on 26 January, at least 10 days earlier than traditional methods, including SVM, RF, DTW, and TCN, using the same reconstructed 5-day NDVI time series. Optimal performance uses a 7 × 7 patch size and 30-day precipitation window.
+DO  - 10.3390/rs18172860
+SN  - 20724292
+DB  - Scopus
+AN  - 2-s2.0-105050396942
+ER  - 
+
+TY  - JOUR
+TI  - An IoT-Enabled Real-Time Crop Prediction Framework Utilizing a Depth-Wise Separable Convolutional Neural Network with Nizar Optimization Algorithm
+AU  - Kote H.
+PY  - 2026
+T2  - SN Computer Science
+DO  - 10.1007/s42979-026-04938-1
+SN  - 2662995X
+DB  - Scopus
+AN  - 2-s2.0-105037647912
+ER  - 
+
+TY  - JOUR
+TI  - MMDFRNet: Dynamic Cross-Modal Decoupling and Alignment for Robust Rice Mapping
+AU  - Fu T.
+PY  - 2026
+T2  - Remote Sensing
+AB  - Accurate rice mapping is critical for grain yield estimation and food security, yet traditional methods often struggle with asynchronous data quality and the inherent statistical gap between SAR and optical signals. To bridge this gap, we propose MMDFRNet, a novel multi-modal deep learning framework that synergistically integrates Sentinel-1 SAR and Sentinel-2 optical imagery. Unlike conventional static fusion approaches, MMDFRNet features a dual-stream modality-specific encoder architecture designed to decouple structural backscattering signals from spectral reflectance. Central to this framework is the multi-modal feature fusion (MMF) module, which employs an adaptive attention mechanism to dynamically align and recalibrate features based on their reliability, effectively mitigating noise from compromised modalities. Additionally, a multi-scale feature fusion (MSF) module is incorporated to coordinate hierarchical semantic information, enhancing boundary delineation in fragmented landscapes. Extensive experiments conducted across multiple study areas in China demonstrate the superiority of MMDFRNet. The model achieves a Precision of 0.9234, an IoU of 0.8612, and an F1-score of 0.9252. Notably, it consistently outperforms state-of-the-art benchmarks (e.g., UNetFormer, STMA, and CCRNet) by margins of up to 11.72% (Precision) and 7.39% (IoU) compared to classic baselines. Furthermore, rigorous ablation studies and degradation analyses confirm the model’s robustness, verifying its ability to transform the degradation paradox into a performance booster through pixel-wise adaptive alignment. Consequently, MMDFRNet offers a promising solution for precise rice area statistics and long-term monitoring in complex agricultural landscapes.
+DO  - 10.3390/rs18091413
+SN  - 20724292
+DB  - Scopus
+AN  - 2-s2.0-105038719405
+ER  - 
+
+TY  - CONF
+TI  - Deep Learning-Driven Wildfire Detection in Türkiye Using Sentinel-2 Imagery and Convolutional Neural Networks
+AU  - Karaş İ.R.
+PY  - 2026
+T2  - International Archives of the Photogrammetry Remote Sensing and Spatial Information Sciences ISPRS Archives
+AB  - Wildfires, intensified by climate change and anthropogenic factors, represent a major threat to ecosystems, infrastructure, and human life. Early detection is critical for effective prevention and mitigation. This study presents a Convolutional Neural Network (CNN)-based system designed to detect wildfires from Sentinel-2 satellite imagery. The methodology integrates advanced preprocessing techniques—including atmospheric correction, cloud masking, and spatial normalization—with a tailored CNN architecture optimized for spectral–spatial feature extraction. Training utilized a curated dataset of wildfire events in Türkiye (2016–2025), annotated at the pixel level to distinguish fire-affected and unaffected regions. The CNN model, employing LeakyReLU activation and AdamW optimization, achieved robust performance, with precision, recall, and F1-scores all averaging 0.97, and an overall accuracy of 97%. High fire-class precision (1.00) minimized false alarms, while strong recall (0.93) ensured reliable detection. The model’s lightweight design allows deployment on cloud platforms and edge devices, enabling real-time monitoring across forestry, agriculture, and urban planning applications. Analysis of Turkish wildfire statistics (1988–2023) revealed that over 90% of fires stem from human negligence or arson, underscoring the need for public education, stricter enforcement, and technology-driven surveillance. Long-term data further indicate a rising severity in fire events, strengthening the case for AI-enhanced early warning systems. This research demonstrates that CNNs applied to Sentinel-2 imagery offer a scalable, accurate, and cost-effective solution for wildfire detection. By bridging remote sensing and deep learning, the proposed system supports both immediate disaster response and long-term policy planning for wildfire risk reduction.
+DO  - 10.5194/isprs-archives-xlviii-4-w18-2025-179-2026
+SN  - 16821750
+DB  - Scopus
+AN  - 2-s2.0-105030113877
+ER  - 
+
+TY  - CONF
+TI  - Deep Learning for Palm Tree Health Assessment: UAV-Based Segmentation in the Figuig Region of Morocco
+AU  - Hammadi A.
+PY  - 2026
+T2  - International Archives of the Photogrammetry Remote Sensing and Spatial Information Sciences ISPRS Archives
+AB  - This study addresses the challenge of classifying healthy and unhealthy date palm trees within the Figuig oasis region of Morocco using high-resolution Unmanned Aerial Vehicle (UAV) imagery and deep learning. Traditional methods like ground surveys are often time-consuming, costly, and subjective for large areas, while satellite-based remote sensing may lack the spatial resolution to assess individual tree health accurately. Our UAV-based deep learning approach aims to overcome these limitations by providing improved scalability, objectivity, and spatial precision. Recognizing that the ’unhealthy’ status observable in top-down UAV imagery represents a visually complex aggregation of symptoms—potentially caused by various stressors prevalent in the Figuig oasis such as Bayoud disease (caused by Fusarium oxysporum f.sp. albedinis) and drought stress—our annotations focused on classifying trees exhibiting these general visual signs of poor health rather than specific causal agents. We therefore focused on semantic segmentation for pixel-level classification. High-resolution RGB orthomosaics were acquired via UAV, processed into tiles, and manually annotated to create a dataset distinguishing three classes: healthy palm, unhealthy palm, and background. This dataset, comprising 296 tiles derived from an initial set and split into training (70%), validation (20%), and testing (10%), was used to train and evaluate U-Net and DeepLabV3+ models implemented from scratch. Quantitative evaluation on the unseen test set demonstrated promising performance: the DeepLabV3+ model achieved a Macro Average F1-score of 82.06%, slightly outperforming the U-Net model’s score of 81.28%. Both models showed strong capability in identifying background and healthy palms. However, accurately segmenting the diverse ’unhealthy’ class remained the most significant challenge. This potentially highlights inherent difficulties in differentiating subtle or varied stress symptoms from aerial RGB data alone, and may also reflect potential limitations of these architectures in fully capturing fine-grained textural variations or distinguishing between visually similar stress responses without additional input (e.g., multispectral data). Despite these challenges, the findings underscore the potential of integrating UAV technology with custom deep learning models for practical, large-scale palm health status assessment in precision agriculture, offering a marked improvement over less scalable or lower-resolution traditional techniques. While limitations related to dataset diversity and the inability to distinguish specific stressors from RGB data exist, this research provides a foundation for developing AI-driven tools to support timely crop management decisions and promote sustainable date palm cultivation. Future work may focus on enhancing model robustness, incorporating complementary data sources (like thermal or multispectral imagery), and investigating model architectures better suited for subtle feature extraction.
+DO  - 10.5194/isprs-archives-xlviii-4-w17-2025-169-2026
+SN  - 16821750
+DB  - Scopus
+AN  - 2-s2.0-105030653583
+ER  - 
+
+TY  - CONF
+TI  - AI-Driven Coffee Plantation Mapping and Monitoring Using Sentinel-2 Multispectral Time Series
+AU  - Le N.T.
+PY  - 2026
+T2  - Proceedings of 2026 8th International Conference on Green Technology and Sustainable Development Gtsd 2026
+AB  - Accurate and up-to-date mapping of coffee plantations is critical for sustainable agricultural management in tropical regions, yet remains challenging due to smallholder farming structures, mixed cropping systems, and persistent cloud cover. This study proposes a scalable and application-oriented framework for coffee plantation mapping using multi-temporal Sentinel-2 multispectral imagery. Instead of relying on complex multi-sensor fusion or deep learning models, the approach focuses on systematic temporal feature engineering from vegetation index time series, including NDVI and NDMI, to capture both spectral characteristics and seasonal growth dynamics of coffee crops.An automated pipeline is developed for satellite data preprocessing, cloud masking, temporal compositing, and feature extraction, ensuring consistency across time and space. The derived temporal features, including statistical descriptors and seasonal indicators, are used as inputs to tree-based machine learning models for coffee versus non-coffee classification. Experimental results across representative communes in Kon Tum province demonstrate that temporal vegetation-index features significantly outperform single-date spectral inputs, improving overall accuracy from approximately 86–87% to 92–94% and increasing the F1-score for the coffee class to 90–93%.Further analysis shows that the proposed features provide strong spatial and temporal generalization, maintaining robust performance across different regions and years. Compared with more complex approaches, the framework achieves competitive accuracy while remaining lightweight, interpretable, and compatible with existing geospatial data infrastructures. These characteristics make it suitable for operational deployment in regional agricultural monitoring systems, supporting data-driven decision-making for sustainable coffee production.
+DO  - 10.1109/gtsd70918.2026.11722426
+DB  - Scopus
+AN  - 2-s2.0-105056763683
+ER  - 
+
+TY  - CONF
+TI  - WaterIDViT: Open Water Body Extraction in High-Resolution Remote Sensing Images Using Vision Transformers
+AU  - Kumar S.
+PY  - 2026
+T2  - Communications in Computer and Information Science
+DO  - 10.1007/978-3-032-08511-5_24
+SN  - 18650929
+DB  - Scopus
+AN  - 2-s2.0-105027201417
+ER  - 
+
+TY  - JOUR
+TI  - Automated Sunflower Head Detection and Yield Estimation from High-Resolution UAV Imagery Using YOLOv11 for Precision Agriculture
+AU  - Iamchuen N.
+PY  - 2026
+T2  - Sustainability Switzerland
+AB  - Traditional methods for assessing sunflower yield across large agricultural fields are typically labor-intensive and time-consuming. This study explores the integration of unmanned aerial vehicle (UAV) imagery and the YOLOv11 deep learning model for automated sunflower head detection and yield estimation. Aerial imagery was collected from sunflower fields using UAVs, and a YOLOv11-based detection model was developed to identify sunflower heads efficiently. Model performance was optimized by tuning the Confidence Threshold and Intersection over Union (IoU) parameters. A total of 1290 image tiles derived from 215 UAV images were used for model training and evaluation. The dataset was divided into training and testing subsets with an 80:20 ratio. The optimal configuration, achieved at a Confidence Threshold of 0.50 and an IoU Threshold of 0.40, yielded balanced and accurate results, including a Precision of 0.84, Recall of 0.95, mAP@0.5 of 0.95, and an F1-score of 0.90. The findings demonstrate that parameter adjustment directly influences model detection accuracy and reliability. Overall, this study confirms that combining UAV remote sensing with YOLOv11 offers a robust and scalable approach for automated sunflower yield estimation, significantly reducing manual effort and processing time. Moreover, the proposed framework can be adapted for other high-value crops, contributing to the advancement of intelligent and data-driven agricultural management systems.
+DO  - 10.3390/su18021026
+SN  - 20711050
+DB  - Scopus
+AN  - 2-s2.0-105028608177
+ER  - 
+
+TY  - CONF
+TI  - Research on Water Body Extraction Based on ESA WorldCover Data and Deep Learning Networks
+AU  - Song J.
+PY  - 2026
+T2  - Springer Proceedings in Physics
+DO  - 10.1007/978-981-95-1410-6_18
+SN  - 09308989
+DB  - Scopus
+AN  - 2-s2.0-105038327529
+ER  - 
+
+TY  - JOUR
+TI  - Design of an iterative vision transformer and LSTM-attention framework for multiple temporal wildfire detection and severity mapping using Sentinel-2 and MODIS data samples
+AU  - Bhosale R.
+PY  - 2026
+T2  - International Journal of Remote Sensing
+AB  - Detection of wildfires and severity mapping in forest ecosystems are critical for ecological preservation and risk mitigation. Traditional methods face challenges such as low spatial resolution, delayed reporting and limited integration of multi-source satellite data. This study proposes a hybrid wildfire detection framework that integrates multi-temporal Sentinel-2 composites and MODIS thermal and burned‑area products, accessed via Google Earth Engine (GEE). Vision Transformers (ViTs) are employed to extract spatial and spectral features, while Long Short-Term Memory (LSTM) networks with an attention mechanism capture temporal dynamics and interval-specific changes. The model generates fire probability maps and employs K-Means clustering to classify fire-prone zones, while NDVI loss and Root Mean Square Error (RMSE) are used to assess vegetation degradation and severity. Experimental results show strong alignment with MODIS burned-area masks, achieving 92.8% accuracy, 90.4% precision, 89.1% recall and an F1 Score of 89.7%. Severity overlays and fire masks further provide actionable insights for risk mitigation. The proposed framework demonstrates significant improvements in spatial granularity, temporal sensitivity and operational applicability, making it a scalable solution for near real-time wildfire detection and management.
+DO  - 10.1080/01431161.2026.2722342
+SN  - 01431161
+DB  - Scopus
+AN  - 2-s2.0-105050389054
+ER  - 
+
+TY  - CONF
+TI  - A Review on LULC Change Detection Using Machine Learning Algorithms in Google Earth Engine
+AU  - Kaur N.
+PY  - 2026
+T2  - International Conference on Innovative Practices in Technology and Management Iciptm 2026
+AB  - Across different geographic regions machine learning algorithms implemented in Google Earth Engine showed the OA (Overall Accuracy) ranging from 80 to 97% for Land Use/Cover change detection. With an accuracy spanning from 90% to 96%, the Random Forest method proved reliable across agricultural, coastal wetland, and mountainous zones, requiring minimal parameter modifications whereas SVM with RBF kernels achieved its peak accuracy of 96.70% but needed extensive parameter adjustments for optimal performance. CART performed particularly well in coastal wetlands, while deep learning models such as Feature Pyramid Networks outperformed traditional methods for rural building detection, although this advantage reduced in complex urban-rural areas. Overall, algorithm performance was strongly dependent on application context, with Sentinel-2 data consistently improving accuracies over Landsat-8, while change class accuracies remained notably lower than stable classes, indicating the greater difficulty of detecting actual land cover changes.
+DO  - 10.1109/iciptm69057.2026.11465257
+DB  - Scopus
+AN  - 2-s2.0-105037837612
+ER  - 

@@ -1,0 +1,20 @@
+﻿# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Editor
+.vscode/
+.idea/
+
+# SLR Crawling Cache & Large Downloads
+hasil_slr/cache/
+pdf_downloads/*.pdf
+

@@ -1,0 +1,9 @@
+("Sentinel-2" OR "multispectral imagery" OR "optical satellite data" OR "agricultural fields") 
+AND 
+("cloud removal" OR "cloud reconstruction" OR "gap-filling" OR "deep learning" OR "CNN" OR "GAN" OR "Transformer") 
+AND 
+("traditional methods" OR "cloud masking" OR "without cloud removal" OR "statistical methods") 
+AND 
+("classification accuracy" OR "Overall Accuracy" OR "OA" OR "F1-Score" OR "Kappa coefficient" OR "performance improvement") 
+AND 
+("agricultural land cover classification" OR "crop type mapping" OR "precision agriculture" OR "remote sensing")

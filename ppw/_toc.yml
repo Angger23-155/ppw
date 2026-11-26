@@ -12,6 +12,7 @@ chapters:
 - file: klasifikasi
 - file: graf
 - file: crawling_pagerank
+- file: crawling_slr
 #   sections:
 #     - file: crawl
 #     - file: preProcessing
