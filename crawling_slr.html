@@ -1,0 +1,1145 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Crawling Paper Akademik &#8212; Pencarian dan Penambangan Web</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=6a604523" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="_static/design-tabs.js?v=fcb327ea"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'crawling_slr';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Proyek UAS" href="crawling_pagerank.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/profil.jpg" class="logo__image only-light" alt="Pencarian dan Penambangan Web - Home"/>
+    <img src="_static/profil.jpg" class="logo__image only-dark pst-js-only" alt="Pencarian dan Penambangan Web - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pengantarwebmining.html"><strong>PENGANTAR WEB MINING</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="crawlingdata.html"><strong>CRAWLING DATA</strong></a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html"><strong>PREPROCESSING</strong></a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="klasifikasi.html"><strong>KLASIFIKASI</strong></a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="graf.html"><strong>GRAF</strong></a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="crawling_pagerank.html"><strong>Proyek UAS</strong></a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Crawling Paper Akademik</strong></a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcrawling_slr.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/crawling_slr.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Crawling Paper Akademik</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Crawling Paper Akademik</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#crawling-paper-akademik-scopus-sciencedirect-wos-download-pdf">Crawling Paper Akademik (Scopus, ScienceDirect, WoS) &amp; Download PDF</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-tugas">📌 Deskripsi Tugas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#persiapan-environment-import-modul">1. Persiapan Environment &amp; Import Modul</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konfigurasi-api-key-database">2. Konfigurasi API Key &amp; Database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kata-kunci-baru-penyesuaian-kueri-pencarian">3. Kata Kunci Baru &amp; Penyesuaian Kueri Pencarian</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eksekusi-crawling-metadata">4. Eksekusi Crawling Metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-eksplorasi-data-hasil-crawling">5. Analisis &amp; Eksplorasi Data Hasil Crawling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-seluruh-file-pdf-pembagian-tugas-mahasiswa">6. Download Seluruh File PDF &amp; Pembagian Tugas Mahasiswa</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rekapitulasi-artikel-yang-tidak-dapat-didownload">7. Rekapitulasi Artikel yang Tidak Dapat Didownload</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="crawling-paper-akademik">
+<h1><strong>Crawling Paper Akademik</strong><a class="headerlink" href="#crawling-paper-akademik" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="crawling-paper-akademik-scopus-sciencedirect-wos-download-pdf">
+<h1>Crawling Paper Akademik (Scopus, ScienceDirect, WoS) &amp; Download PDF<a class="headerlink" href="#crawling-paper-akademik-scopus-sciencedirect-wos-download-pdf" title="Link to this heading">#</a></h1>
+<p><strong>Matakuliah:</strong> Pencarian dan Penambangan Web (PPW)<br />
+<strong>Topik:</strong> Systematic Literature Review (SLR) — Dampak Tutupan Awan pada Klasifikasi LULC Pertanian &amp; Perkebunan Menggunakan Citra Sentinel-2 dan Deep Learning (2016–2026)</p>
+<hr class="docutils" />
+<section id="deskripsi-tugas">
+<h2>📌 Deskripsi Tugas<a class="headerlink" href="#deskripsi-tugas" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Melakukan crawling metadata artikel ilmiah dari <strong>Scopus</strong>, <strong>ScienceDirect</strong>, dan <strong>Web of Science (WoS)</strong> menggunakan API resmi.</p></li>
+<li><p>Menggunakan kata kunci baru dari file <code class="docutils literal notranslate"><span class="pre">Kata</span> <span class="pre">Kunci</span> <span class="pre">baru.txt</span></code>.</p></li>
+<li><p>Menggabungkan data, melakukan deduplikasi, dan melengkapi abstrak (OpenAlex / Semantic Scholar).</p></li>
+<li><p>Melakukan download seluruh file PDF artikel open-access.</p></li>
+<li><p>Mencatat daftar referensi yang tidak dapat didownload (closed-access / berbayar) untuk pembagian tugas mahasiswa.</p></li>
+</ol>
+</section>
+<section id="persiapan-environment-import-modul">
+<h2>1. Persiapan Environment &amp; Import Modul<a class="headerlink" href="#persiapan-environment-import-modul" title="Link to this heading">#</a></h2>
+<p>Memastikan pustaka yang dibutuhkan (<code class="docutils literal notranslate"><span class="pre">requests</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>) telah terpasang.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="c1"># Pastikan direktori kerja berada di folder repo ppw</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Current Working Directory:"</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Pandas Version:"</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Current Working Directory: d:\PPW\ppw
+Pandas Version: 2.2.2
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="konfigurasi-api-key-database">
+<h2>2. Konfigurasi API Key &amp; Database<a class="headerlink" href="#konfigurasi-api-key-database" title="Link to this heading">#</a></h2>
+<p>Masukkan API Key Elsevier yang sudah didapatkan. Key Elsevier dapat digunakan untuk <strong>Scopus</strong> dan <strong>ScienceDirect</strong> sekaligus.</p>
+<blockquote>
+<div><p><strong>Catatan:</strong> Sesuai arahan, jika API Key Web of Science (WoS) belum disetujui, variabel <code class="docutils literal notranslate"><span class="pre">WOS_API_KEY</span></code> dapat dikosongkan dan database WoS akan dilewati secara otomatis.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Masukkan API Key Anda di sini</span>
+<span class="n">SCOPUS_API_KEY</span> <span class="o">=</span> <span class="s2">"5c93b7ad747a1f180a1e4661220a878d"</span>
+<span class="n">WOS_API_KEY</span> <span class="o">=</span> <span class="s2">"3c39779cef282012f485bbc6bd0f6f1b17900f27"</span>     <span class="c1"># Kosongkan jika belum memiliki API Key WoS</span>
+<span class="n">EMAIL_USER</span> <span class="o">=</span> <span class="s2">"anggerramdhan@gmail.com"</span>     
+
+<span class="c1"># Set environment variables untuk modul crawling</span>
+<span class="k">if</span> <span class="n">SCOPUS_API_KEY</span><span class="p">:</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"SCOPUS_API_KEY"</span><span class="p">]</span> <span class="o">=</span> <span class="n">SCOPUS_API_KEY</span>
+<span class="k">if</span> <span class="n">WOS_API_KEY</span><span class="p">:</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"WOS_API_KEY"</span><span class="p">]</span> <span class="o">=</span> <span class="n">WOS_API_KEY</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Status Konfigurasi:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"- Elsevier Key :"</span><span class="p">,</span> <span class="s2">"Tersedia"</span> <span class="k">if</span> <span class="n">SCOPUS_API_KEY</span> <span class="k">else</span> <span class="s2">"Belum diisi"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"- WoS Key      :"</span><span class="p">,</span> <span class="s2">"Tersedia"</span> <span class="k">if</span> <span class="n">WOS_API_KEY</span> <span class="k">else</span> <span class="s2">"Dilewati / Kosong"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"- Email        :"</span><span class="p">,</span> <span class="n">EMAIL_USER</span> <span class="k">if</span> <span class="n">EMAIL_USER</span> <span class="k">else</span> <span class="s2">"Belum diisi"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Status Konfigurasi:
+- Elsevier Key : Tersedia
+- WoS Key      : Tersedia
+- Email        : anggerramdhan@gmail.com
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="kata-kunci-baru-penyesuaian-kueri-pencarian">
+<h2>3. Kata Kunci Baru &amp; Penyesuaian Kueri Pencarian<a class="headerlink" href="#kata-kunci-baru-penyesuaian-kueri-pencarian" title="Link to this heading">#</a></h2>
+<p>Kata kunci baru yang digunakan berasal dari <code class="docutils literal notranslate"><span class="pre">Kata</span> <span class="pre">Kunci</span> <span class="pre">baru.txt</span></code>:</p>
+<ul class="simple">
+<li><p><strong>Sensor / Platform</strong>: <code class="docutils literal notranslate"><span class="pre">Sentinel-2</span></code>, <code class="docutils literal notranslate"><span class="pre">multispectral</span> <span class="pre">imagery</span></code>, <code class="docutils literal notranslate"><span class="pre">optical</span> <span class="pre">satellite</span> <span class="pre">data</span></code>, <code class="docutils literal notranslate"><span class="pre">agricultural</span> <span class="pre">fields</span></code></p></li>
+<li><p><strong>Metode</strong>: <code class="docutils literal notranslate"><span class="pre">cloud</span> <span class="pre">removal</span></code>, <code class="docutils literal notranslate"><span class="pre">cloud</span> <span class="pre">reconstruction</span></code>, <code class="docutils literal notranslate"><span class="pre">gap-filling</span></code>, <code class="docutils literal notranslate"><span class="pre">deep</span> <span class="pre">learning</span></code>, <code class="docutils literal notranslate"><span class="pre">CNN</span></code>, <code class="docutils literal notranslate"><span class="pre">GAN</span></code>, <code class="docutils literal notranslate"><span class="pre">Transformer</span></code></p></li>
+<li><p><strong>Komparasi / Kondisi</strong>: <code class="docutils literal notranslate"><span class="pre">traditional</span> <span class="pre">methods</span></code>, <code class="docutils literal notranslate"><span class="pre">cloud</span> <span class="pre">masking</span></code>, <code class="docutils literal notranslate"><span class="pre">without</span> <span class="pre">cloud</span> <span class="pre">removal</span></code>, <code class="docutils literal notranslate"><span class="pre">statistical</span> <span class="pre">methods</span></code></p></li>
+<li><p><strong>Metrik Evaluasi</strong>: <code class="docutils literal notranslate"><span class="pre">classification</span> <span class="pre">accuracy</span></code>, <code class="docutils literal notranslate"><span class="pre">Overall</span> <span class="pre">Accuracy</span></code>, <code class="docutils literal notranslate"><span class="pre">OA</span></code>, <code class="docutils literal notranslate"><span class="pre">F1-Score</span></code>, <code class="docutils literal notranslate"><span class="pre">Kappa</span> <span class="pre">coefficient</span></code>, <code class="docutils literal notranslate"><span class="pre">performance</span> <span class="pre">improvement</span></code></p></li>
+<li><p><strong>Aplikasi / Domain</strong>: <code class="docutils literal notranslate"><span class="pre">agricultural</span> <span class="pre">land</span> <span class="pre">cover</span> <span class="pre">classification</span></code>, <code class="docutils literal notranslate"><span class="pre">crop</span> <span class="pre">type</span> <span class="pre">mapping</span></code>, <code class="docutils literal notranslate"><span class="pre">precision</span> <span class="pre">agriculture</span></code>, <code class="docutils literal notranslate"><span class="pre">remote</span> <span class="pre">sensing</span></code></p></li>
+</ul>
+<p>File <code class="docutils literal notranslate"><span class="pre">kueri_baru.py</span></code> telah disusun untuk memformat kata kunci tersebut sesuai sintaks masing-masing database (Scopus query, WoS query, dan ScienceDirect payload).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">kueri_baru</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Rentang Tahun:"</span><span class="p">,</span> <span class="n">kueri_baru</span><span class="o">.</span><span class="n">TAHUN_MULAI</span><span class="p">,</span> <span class="s2">"-"</span><span class="p">,</span> <span class="n">kueri_baru</span><span class="o">.</span><span class="n">TAHUN_AKHIR</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Kueri Scopus ---</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">kueri_baru</span><span class="o">.</span><span class="n">SCOPUS</span><span class="p">[:</span><span class="mi">300</span><span class="p">],</span> <span class="s2">"..."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Kueri ScienceDirect ---</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">kueri_baru</span><span class="o">.</span><span class="n">SCIENCEDIRECT</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rentang Tahun: 2016 - 2026
+
+--- Kueri Scopus ---
+ TITLE-ABS-KEY(("Sentinel-2" OR "multispectral imagery" OR "optical satellite data" OR "agricultural fields") AND ("cloud removal" OR "cloud reconstruction" OR "gap-filling" OR "deep learning" OR "CNN" OR "GAN" OR "Transformer") AND ("traditional methods" OR "cloud masking" OR "without cloud removal" ...
+
+--- Kueri ScienceDirect ---
+ [
+  {
+    "title": "\"Sentinel-2\" OR \"multispectral\" OR \"optical satellite\" OR \"agricultural\" OR \"crop\" OR \"land cover\" OR \"remote sensing\"",
+    "qs": "(\"cloud removal\" OR \"cloud reconstruction\" OR \"gap-filling\") AND (\"deep learning\" OR \"CNN\" OR \"GAN\" OR \"Transformer\")"
+  },
+  {
+    "title": "\"Sentinel-2\" OR \"land cover classification\" OR \"crop type mapping\" OR \"precision agriculture\" OR \"remote sensing\"",
+    "qs": "(\"classification accuracy\" OR \"Overall Accuracy\" OR \"F1-Score\") AND (\"cloud masking\" OR \"traditional methods\" OR \"statistical methods\")"
+  }
+]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="eksekusi-crawling-metadata">
+<h2>4. Eksekusi Crawling Metadata<a class="headerlink" href="#eksekusi-crawling-metadata" title="Link to this heading">#</a></h2>
+<p>Menjalankan fungsi crawling dari modul <code class="docutils literal notranslate"><span class="pre">slr_fetch.py</span></code>. Modul ini akan:</p>
+<ol class="arabic simple">
+<li><p>Mengambil metadata artikel dari Scopus &amp; ScienceDirect (dan WoS jika ada key).</p></li>
+<li><p>Menghapus duplikasi artikel berdasarkan DOI dan normalisasi judul.</p></li>
+<li><p>Melengkapi abstrak secara otomatis menggunakan API OpenAlex dan Semantic Scholar.</p></li>
+<li><p>Menyimpan data ke folder <code class="docutils literal notranslate"><span class="pre">hasil_slr/</span></code>.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Memilih database yang aktif</span>
+<span class="n">active_sources</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"scopus"</span><span class="p">,</span> <span class="s2">"sciencedirect"</span><span class="p">]</span>
+<span class="k">if</span> <span class="n">WOS_API_KEY</span><span class="p">:</span>
+    <span class="n">active_sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"wos"</span><span class="p">)</span>
+
+<span class="n">cmd_crawling</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"python slr_fetch.py --sources </span><span class="si">{</span><span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">active_sources</span><span class="p">)</span><span class="si">}</span><span class="s2"> --config kueri_baru.py --out hasil_slr"</span>
+<span class="k">if</span> <span class="n">EMAIL_USER</span><span class="p">:</span>
+    <span class="n">cmd_crawling</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">" --email </span><span class="si">{</span><span class="n">EMAIL_USER</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Perintah yang dijalankan:"</span><span class="p">,</span> <span class="n">cmd_crawling</span><span class="p">)</span>
+<span class="c1"># Eksekusi via shell</span>
+<span class="o">!{</span>cmd_crawling<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Perintah yang dijalankan: python slr_fetch.py --sources scopus sciencedirect wos --config kueri_baru.py --out hasil_slr --email anggerramdhan@gmail.com
+[22:48:43] Kueri dibaca dari kueri_baru.py
+[22:48:43] Scopus 2016: 0 hasil
+[22:48:43] Scopus 2017: 0 hasil
+[22:48:43] Scopus 2018: 0 hasil
+[22:48:43] Scopus 2019: 1 hasil
+[22:48:43] Scopus 2020: 1 hasil
+[22:48:43] Scopus 2021: 0 hasil
+[22:48:43] Scopus 2022: 1 hasil
+[22:48:43] Scopus 2023: 4 hasil
+[22:48:43] Scopus 2024: 5 hasil
+[22:48:43] Scopus 2025: 7 hasil
+[22:48:43] Scopus 2026: 15 hasil
+[22:48:44] WoS 2016: 0 hasil
+[22:48:46] WoS 2017: 0 hasil
+[22:48:47] WoS 2018: 0 hasil
+[22:48:49] WoS 2019: 1 hasil
+[22:48:51] WoS 2020: 1 hasil
+[22:48:52] WoS 2021: 0 hasil
+[22:48:54] WoS 2022: 2 hasil
+[22:48:55] WoS 2023: 4 hasil
+[22:48:57] WoS 2024: 2 hasil
+[22:48:58] WoS 2025: 4 hasil
+[22:49:00] WoS 2026: 10 hasil
+[22:49:00] ScienceDirect GAGAL: ScienceDirect 2016: akses ditolak (HTTP 401). Periksa API key / hak akses.
+Respons: {"service-error":{"status":{"statusCode":"AUTHORIZATION_ERROR","statusText":"The requestor is not authorized to access the requested view or fields of the resource"}}}
+[22:49:00] Gabungan: 54 rekaman -&gt; 35 unik (19 duplikat dihapus)
+[22:49:00] OpenAlex: mencari abstrak untuk 33 rekaman...
+[22:49:02] OpenAlex: 25 abstrak ditemukan
+[22:49:02] Semantic Scholar: mencari abstrak untuk 8 rekaman...
+[22:49:03] Semantic Scholar: HTTP 429, menunggu 3 detik...
+[22:49:07] Semantic Scholar: 1 abstrak ditemukan
+[22:49:07] SELESAI
+[22:49:07]   Rekaman unik         : 35
+[22:49:07]   Dengan abstrak       : 26 (74%)
+[22:49:07]   Tanpa abstrak        : 9 -&gt; lihat abstrak_kosong.csv (buka link DOI)
+[22:49:07]   File untuk Rayyan    : hasil_slr\hasil_rayyan.ris
+[22:49:07]   Angka untuk PRISMA   : hasil_slr\log_pencarian.csv
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="analisis-eksplorasi-data-hasil-crawling">
+<h2>5. Analisis &amp; Eksplorasi Data Hasil Crawling<a class="headerlink" href="#analisis-eksplorasi-data-hasil-crawling" title="Link to this heading">#</a></h2>
+<p>Membaca file <code class="docutils literal notranslate"><span class="pre">hasil_gabungan.csv</span></code> dan <code class="docutils literal notranslate"><span class="pre">log_pencarian.csv</span></code> untuk melihat ringkasan hasil.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">csv_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"hasil_slr/hasil_gabungan.csv"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">csv_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">csv_path</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total artikel unik yang berhasil dikumpulkan: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)[[</span><span class="s2">"title"</span><span class="p">,</span> <span class="s2">"authors"</span><span class="p">,</span> <span class="s2">"year"</span><span class="p">,</span> <span class="s2">"journal"</span><span class="p">,</span> <span class="s2">"source"</span><span class="p">,</span> <span class="s2">"doi"</span><span class="p">]])</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"File hasil_gabungan.csv belum ada. Jalankan cell eksekusi crawling terlebih dahulu."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total artikel unik yang berhasil dikumpulkan: 35
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>title</th>
+      <th>authors</th>
+      <th>year</th>
+      <th>journal</th>
+      <th>source</th>
+      <th>doi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Patch similarity convolutional neural network ...</td>
+      <td>Peng, B; Meng, ZL; Huang, QY; Wang, CX</td>
+      <td>2019</td>
+      <td>Remote Sensing</td>
+      <td>Scopus; WoS</td>
+      <td>10.3390/rs11212492</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A CNN-Transformer Hybrid Approach for Crop Cla...</td>
+      <td>Li, ZT; Chen, GK; Zhang, TX</td>
+      <td>2020</td>
+      <td>IEEE Journal of Selected Topics in Applied Ear...</td>
+      <td>Scopus; WoS</td>
+      <td>10.1109/jstars.2020.2971763</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Using time series vector features for annual c...</td>
+      <td>Lu, XP; Zhou, YS; Zhang, XJ; Yu, HK; Cai, GS</td>
+      <td>2022</td>
+      <td>Plos One</td>
+      <td>Scopus; WoS</td>
+      <td>10.1371/journal.pone.0272300</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Comparisons between temporal statistical metri...</td>
+      <td>Liu, XM; Xie, S; Yang, JN; Sun, L; Liu, LY; Zh...</td>
+      <td>2023</td>
+      <td>Computers and Electronics in Agriculture</td>
+      <td>Scopus; WoS</td>
+      <td>10.1016/j.compag.2023.108015</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Semantic segmentation model for land cover cla...</td>
+      <td>Lilay, MY; Taye, GD</td>
+      <td>2023</td>
+      <td>SN Applied Sciences</td>
+      <td>Scopus; WoS</td>
+      <td>10.1007/s42452-023-05280-4</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualisasi tren publikasi per tahun</span>
+<span class="k">if</span> <span class="n">csv_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="n">df_year</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"year"</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">df_year</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">"bar"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"royalblue"</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">"black"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Distribusi Publikasi Berdasarkan Tahun (2016-2026)"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Tahun"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Jumlah Artikel"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">"--"</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/cd7294a48cba9524aafc0c9121a74e6f0bf756dad6faeb8abe70d10d86ced138.png" src="_images/cd7294a48cba9524aafc0c9121a74e6f0bf756dad6faeb8abe70d10d86ced138.png" />
+</div>
+</div>
+</section>
+<section id="download-seluruh-file-pdf-pembagian-tugas-mahasiswa">
+<h2>6. Download Seluruh File PDF &amp; Pembagian Tugas Mahasiswa<a class="headerlink" href="#download-seluruh-file-pdf-pembagian-tugas-mahasiswa" title="Link to this heading">#</a></h2>
+<p>Proses download dilakukan menggunakan API <strong>Unpaywall</strong> dan <strong>Semantic Scholar</strong> untuk mengambil artikel open-access secara legal dan gratis.</p>
+<blockquote>
+<div><p><strong>Catatan:</strong> Sesuai instruksi dosen, proses download PDF dapat dibagi per mahasiswa berdasarkan rentang nomor indeks artikel (menggunakan opsi <code class="docutils literal notranslate"><span class="pre">--start</span></code> dan <code class="docutils literal notranslate"><span class="pre">--end</span></code>).</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tentukan rentang artikel untuk mahasiswa yang bertugas</span>
+<span class="n">START_INDEX</span> <span class="o">=</span> <span class="mi">1</span>   <span class="c1"># Nomor awal artikel</span>
+<span class="n">END_INDEX</span> <span class="o">=</span> <span class="mi">50</span>    <span class="c1"># Nomor akhir artikel (0 = download seluruhnya)</span>
+
+<span class="n">cmd_download</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"python download_pdf.py --input hasil_slr/hasil_gabungan.csv --start </span><span class="si">{</span><span class="n">START_INDEX</span><span class="si">}</span><span class="s2"> --end </span><span class="si">{</span><span class="n">END_INDEX</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">if</span> <span class="n">EMAIL_USER</span><span class="p">:</span>
+    <span class="n">cmd_download</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">" --email </span><span class="si">{</span><span class="n">EMAIL_USER</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Perintah Download:"</span><span class="p">,</span> <span class="n">cmd_download</span><span class="p">)</span>
+<span class="o">!{</span>cmd_download<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Perintah Download: python download_pdf.py --input hasil_slr/hasil_gabungan.csv --start 1 --end 50 --email anggerramdhan@gmail.com
+Total rekaman: 35
+Memproses rekaman #1 s/d #35 (35 artikel)
+  [1/35] Mencari PDF: Patch similarity convolutional neural network for urban floo...
+    ✗ GAGAL download (file bukan PDF): 10.3390/rs11212492
+  [2/35] Mencari PDF: A CNN-Transformer Hybrid Approach for Crop Classification Us...
+    ✗ GAGAL download (file bukan PDF): 10.1109/jstars.2020.2971763
+  [3/35] SUDAH ADA: 0003_2022_Using_time_series_vector_features_for_annual_cultivated_land.pdf
+  [4/35] Mencari PDF: Comparisons between temporal statistical metrics, time serie...
+    ✗ GAGAL download (file bukan PDF): 10.1016/j.compag.2023.108015
+  [5/35] Mencari PDF: Semantic segmentation model for land cover classification fr...
+    ✗ GAGAL download (file bukan PDF): 10.1007/s42452-023-05280-4
+  [6/35] Mencari PDF: Extracting Tea Plantations from Multitemporal Sentinel-2 Ima...
+    ✗ GAGAL download (file bukan PDF): 10.3390/agriculture13010010
+  [7/35] Mencari PDF: Land cover classification using Land Parcel Identification S...
+    ✗ GAGAL download (file bukan PDF): 10.1080/10106049.2022.2146760
+  [8/35] SKIP (tanpa DOI): Monitoring the Distribution of Mangrove Area using Synthetic...
+  [9/35] Mencari PDF: Intelligent Water Body Delineation for Flood Monitoring Usin...
+    ✗ TIDAK TERSEDIA (closed access): 10.1109/aisp61711.2024.10870599
+  [10/35] Mencari PDF: A Novel Coral Reef Classification Method Combining Radiative...
+    ✗ GAGAL download (file bukan PDF): 10.1109/jstars.2024.3430899
+  [11/35] SKIP (tanpa DOI): From Pixels to Patterns: A Review of Land Cover Analysis Tec...
+  [12/35] Mencari PDF: A method for robust estimation of snow seasonality metrics f...
+    ✗ GAGAL download (file bukan PDF): 10.1080/10106049.2024.2313001
+  [13/35] Mencari PDF: Land use and land cover change detection from multisource sa...
+    ✗ TIDAK TERSEDIA (closed access): 10.1016/j.engappai.2025.112187
+  [14/35] Mencari PDF: Severity classification of pepper verticillium wilt from UAV...
+    ✗ GAGAL download (file bukan PDF): 10.1016/j.atech.2025.101423
+  [15/35] Mencari PDF: Unified estimation of rice canopy leaf area index over multi...
+    ✗ GAGAL download (file bukan PDF): 10.1186/s13007-025-01398-1
+  [16/35] Mencari PDF: Enhanced agricultural land use/land cover classification in ...
+    ✗ TIDAK TERSEDIA (closed access): 10.1016/j.isprsjprs.2025.08.019
+  [17/35] Mencari PDF: Soil Texture Classification Based on Deep Learning Networks ...
+    ✗ TIDAK TERSEDIA (closed access): 10.1109/icgmrs66001.2025.11065565
+  [18/35] Mencari PDF: Robust Small Methane Plume Segmentation in Satellite Imagery...
+    ✗ TIDAK TERSEDIA (closed access): 10.1109/iccais67508.2025.11262127
+  [19/35] Mencari PDF: Adaptive Preprocessing Mechanism of Satellite Imagery for Ve...
+    ✗ TIDAK TERSEDIA (closed access): 10.1109/iceca66444.2025.11383158
+  [20/35] Mencari PDF: Assessing the effectiveness of deep embeddings for tree spec...
+    ✗ GAGAL download (file bukan PDF): 10.1016/j.srs.2026.100498
+  [21/35] Mencari PDF: STCAFormer: Spatio-temporal cross attention based transforme...
+    ✗ GAGAL download (file bukan PDF): 10.1016/j.rse.2026.115594
+  [22/35] Mencari PDF: Instance segmentation of different spatial resolution satell...
+    ✗ TIDAK TERSEDIA (closed access): 10.1007/s40328-026-00498-1
+  [23/35] Mencari PDF: Water Body Extraction in the Middle Reaches of the Heilongji...
+    ✗ GAGAL download (file bukan PDF): 10.3390/w18172126
+  [24/35] Mencari PDF: CL-LGFM: Early-Season Winter Wheat Mapping by Integrating Se...
+    ✗ GAGAL download (file bukan PDF): 10.3390/rs18172860
+  [25/35] Mencari PDF: An IoT-Enabled Real-Time Crop Prediction Framework Utilizing...
+    ✗ TIDAK TERSEDIA (closed access): 10.1007/s42979-026-04938-1
+  [26/35] Mencari PDF: MMDFRNet: Dynamic Cross-Modal Decoupling and Alignment for R...
+    ✗ GAGAL download (file bukan PDF): 10.3390/rs18091413
+  [27/35] SUDAH ADA: 0027_2026_Deep_Learning-Driven_Wildfire_Detection_in_Türkiye_Using_Sen.pdf
+  [28/35] Mencari PDF: Deep Learning for Palm Tree Health Assessment: UAV-Based Seg...
+    ✗ GAGAL download (file bukan PDF): 10.5194/isprs-archives-xlviii-4-w17-2025-169-2026
+  [29/35] Mencari PDF: AI-Driven Coffee Plantation Mapping and Monitoring Using Sen...
+    ✗ TIDAK TERSEDIA (closed access): 10.1109/gtsd70918.2026.11722426
+  [30/35] Mencari PDF: WaterIDViT: Open Water Body Extraction in High-Resolution Re...
+    ✗ TIDAK TERSEDIA (closed access): 10.1007/978-3-032-08511-5_24
+  [31/35] Mencari PDF: Automated Sunflower Head Detection and Yield Estimation from...
+    ✗ GAGAL download (file bukan PDF): 10.3390/su18021026
+  [32/35] Mencari PDF: Research on Water Body Extraction Based on ESA WorldCover Da...
+    ✗ TIDAK TERSEDIA (closed access): 10.1007/978-981-95-1410-6_18
+  [33/35] Mencari PDF: Design of an iterative vision transformer and LSTM-attention...
+    ✗ TIDAK TERSEDIA (closed access): 10.1080/01431161.2026.2722342
+  [34/35] Mencari PDF: A Review on LULC Change Detection Using Machine Learning Alg...
+    ✗ TIDAK TERSEDIA (closed access): 10.1109/iciptm69057.2026.11465257
+  [35/35] Mencari PDF: Evaluating the Efficacy of AlphaEarth Embeddings for Tree Sp...
+    ✗ GAGAL download (file bukan PDF): 10.1109/jstars.2026.3699640
+
+============================================================
+RINGKASAN DOWNLOAD PDF
+============================================================
+  Total diproses    : 35
+  Berhasil download : 2
+  Gagal download    : 33
+  File PDF di       : D:\PPW\ppw\pdf_downloads
+  Daftar berhasil   : pdf_downloads\berhasil_download.csv
+  Daftar gagal      : pdf_downloads\gagal_download.csv
+============================================================
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="rekapitulasi-artikel-yang-tidak-dapat-didownload">
+<h2>7. Rekapitulasi Artikel yang Tidak Dapat Didownload<a class="headerlink" href="#rekapitulasi-artikel-yang-tidak-dapat-didownload" title="Link to this heading">#</a></h2>
+<p>Artikel yang berbayar (closed access) atau tidak memiliki tautan PDF gratis akan dicatat ke dalam <code class="docutils literal notranslate"><span class="pre">gagal_download.csv</span></code> beserta tautan DOI-nya agar dapat diunduh manual melalui repositori kampus atau perpustakaan.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gagal_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"pdf_downloads/gagal_download.csv"</span><span class="p">)</span>
+<span class="n">berhasil_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"pdf_downloads/berhasil_download.csv"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">berhasil_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="n">df_berhasil</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">berhasil_path</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ Total PDF Berhasil Diunduh: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_berhasil</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">gagal_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="n">df_gagal</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">gagal_path</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✗ Total PDF Gagal Diunduh (Closed Access): </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_gagal</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Daftar Referensi yang Tidak Dapat Didownload Otomatis:"</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">df_gagal</span><span class="p">[[</span><span class="s2">"no"</span><span class="p">,</span> <span class="s2">"title"</span><span class="p">,</span> <span class="s2">"year"</span><span class="p">,</span> <span class="s2">"source"</span><span class="p">,</span> <span class="s2">"alasan"</span><span class="p">,</span> <span class="s2">"link"</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Daftar gagal_download.csv belum tersedia. Jalankan proses download terlebih dahulu."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✓ Total PDF Berhasil Diunduh: 2
+✗ Total PDF Gagal Diunduh (Closed Access): 33
+
+Daftar Referensi yang Tidak Dapat Didownload Otomatis:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>no</th>
+      <th>title</th>
+      <th>year</th>
+      <th>source</th>
+      <th>alasan</th>
+      <th>link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Patch similarity convolutional neural network ...</td>
+      <td>2019</td>
+      <td>Scopus; WoS</td>
+      <td>File bukan PDF (Unpaywall)</td>
+      <td>https://doi.org/10.3390/rs11212492</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>A CNN-Transformer Hybrid Approach for Crop Cla...</td>
+      <td>2020</td>
+      <td>Scopus; WoS</td>
+      <td>File bukan PDF (Unpaywall)</td>
+      <td>https://doi.org/10.1109/jstars.2020.2971763</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4</td>
+      <td>Comparisons between temporal statistical metri...</td>
+      <td>2023</td>
+      <td>Scopus; WoS</td>
+      <td>File bukan PDF (Unpaywall)</td>
+      <td>https://doi.org/10.1016/j.compag.2023.108015</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5</td>
+      <td>Semantic segmentation model for land cover cla...</td>
+      <td>2023</td>
+      <td>Scopus; WoS</td>
+      <td>File bukan PDF (Unpaywall)</td>
+      <td>https://doi.org/10.1007/s42452-023-05280-4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>6</td>
+      <td>Extracting Tea Plantations from Multitemporal ...</td>
+      <td>2023</td>
+      <td>Scopus; WoS</td>
+      <td>File bukan PDF (Unpaywall)</td>
+      <td>https://doi.org/10.3390/agriculture13010010</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>7</td>
+      <td>Land cover classification using Land Parcel Id...</td>
+      <td>2023</td>
+      <td>Scopus; WoS</td>
+      <td>File bukan PDF (Unpaywall)</td>
+      <td>https://doi.org/10.1080/10106049.2022.2146760</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>8</td>
+      <td>Monitoring the Distribution of Mangrove Area u...</td>
+      <td>2024</td>
+      <td>Scopus</td>
+      <td>Tidak ada DOI</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>9</td>
+      <td>Intelligent Water Body Delineation for Flood M...</td>
+      <td>2024</td>
+      <td>Scopus</td>
+      <td>Tidak ada PDF open-access</td>
+      <td>https://doi.org/10.1109/aisp61711.2024.10870599</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>10</td>
+      <td>A Novel Coral Reef Classification Method Combi...</td>
+      <td>2024</td>
+      <td>Scopus</td>
+      <td>File bukan PDF (Unpaywall)</td>
+      <td>https://doi.org/10.1109/jstars.2024.3430899</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>11</td>
+      <td>From Pixels to Patterns: A Review of Land Cove...</td>
+      <td>2024</td>
+      <td>Scopus</td>
+      <td>Tidak ada DOI</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="crawling_pagerank.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Proyek UAS</strong></p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Crawling Paper Akademik</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#crawling-paper-akademik-scopus-sciencedirect-wos-download-pdf">Crawling Paper Akademik (Scopus, ScienceDirect, WoS) &amp; Download PDF</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-tugas">📌 Deskripsi Tugas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#persiapan-environment-import-modul">1. Persiapan Environment &amp; Import Modul</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konfigurasi-api-key-database">2. Konfigurasi API Key &amp; Database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kata-kunci-baru-penyesuaian-kueri-pencarian">3. Kata Kunci Baru &amp; Penyesuaian Kueri Pencarian</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eksekusi-crawling-metadata">4. Eksekusi Crawling Metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-eksplorasi-data-hasil-crawling">5. Analisis &amp; Eksplorasi Data Hasil Crawling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-seluruh-file-pdf-pembagian-tugas-mahasiswa">6. Download Seluruh File PDF &amp; Pembagian Tugas Mahasiswa</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rekapitulasi-artikel-yang-tidak-dapat-didownload">7. Rekapitulasi Artikel yang Tidak Dapat Didownload</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Angger Maulana Effendi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
